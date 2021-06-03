@@ -1,0 +1,22 @@
+.container {
+  margin: 35px 20vw;
+}
+
+@media only screen and (max-width: 1366px) {
+  .container {
+    margin: 35px 15vw;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .container {
+    margin: 35px 10vw;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    margin: 35px 5vw;
+  }
+}
+/*# sourceMappingURL=container.css.map */

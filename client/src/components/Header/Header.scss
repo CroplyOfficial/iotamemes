@@ -1,0 +1,95 @@
+$hover-color: rgb(255, 255, 209);
+
+header {
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom right, #3d3d3d, rgb(112, 112, 112));
+  box-sizing: border-box;
+  padding: 10px 7.5vw;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+
+  .branding {
+    font-size: 24px;
+    color: white;
+
+    a {
+      color: white;
+    }
+  }
+
+  .links {
+    .desktop {
+      display: flex;
+
+      .link {
+        padding: 7.5px;
+        color: white;
+
+        a {
+          color: white;
+
+          &:hover {
+            color: $hover-color;
+            cursor: pointer;
+          }
+        }
+
+        &:hover {
+          color: $hover-color;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .mobile {
+      svg {
+        fill: white;
+        margin-top: 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+#mobileNav {
+  position: fixed;
+  top: 60px;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  height: calc(100vh - 60px);
+  width: 100vw;
+  box-sizing: border-box;
+  filter: blur(10);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  right: -125vw;
+  transition: ease-in-out 0.4s;
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+      flex-basis: 100%;
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      padding: 20px;
+      border-bottom: 1px solid white;
+    }
+
+    a:last-of-type {
+      border-bottom: none;
+    }
+  }
+}
+
+.mobNavVisible {
+  right: 0vw !important;
+}
