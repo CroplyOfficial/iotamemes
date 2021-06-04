@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './SettingsScreen.css';
-import Container from '../../components/Container/Container';
+import Container60 from '../../components/Container60/Container60';
 import Card from '../../components/Card/Card';
 import Section from '../../components/Section/Section';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ const SettingsScreen = () => {
 
   return (
     <>
-      <Container>
+      <Container60>
         <Card>
           {successMessage && <div className='success'>{successMessage}</div>}
           {errorMessage && <div className='error'>{errorMessage}</div>}
@@ -57,7 +57,7 @@ const SettingsScreen = () => {
               <label htmlFor='email'>Email Address</label>
               <input
                 type='email'
-                id='name'
+                id='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -85,7 +85,7 @@ const SettingsScreen = () => {
             </form>
           </Section>
         </Card>
-      </Container>
+      </Container60>
     </>
   );
 };

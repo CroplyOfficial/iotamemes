@@ -1,0 +1,9 @@
+.container-80 {
+  margin: 35px 10vw;
+}
+
+@media only screen and (max-width: 900px) {
+  .container-80 {
+    margin: 35px 5vw;
+  }
+}

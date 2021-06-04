@@ -6,9 +6,15 @@ const PrivateRoute = ({ children, ...rest }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const location = window.location.pathname;
+
   return (
     <>
-      {userInfo ? <Route {...rest}></Route> : <Redirect to='/login'></Redirect>}
+      {userInfo ? (
+        <Route {...rest}></Route>
+      ) : (
+        <Redirect to={`/login?redirect=${location}`}></Redirect>
+      )}
     </>
   );
 };

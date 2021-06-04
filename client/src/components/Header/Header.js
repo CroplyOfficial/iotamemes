@@ -45,7 +45,7 @@ const Header = ({ orgName }) => {
         <div className='desktop'>
           <div className='link'>
             {userInfo ? (
-              <Link to='/settings' onClick={closeNav}>
+              <Link to='/dashboard' onClick={closeNav}>
                 Welcome, {userInfo.name.split(' ')[0]}!
               </Link>
             ) : (

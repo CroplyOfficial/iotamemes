@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
 import SettingsScreen from './screens/SettingsScreen/SettingsScreen';
+import DashboardScreen from './screens/DashboardScreen/DashboardScreen';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path='/register' component={RegisterScreen} />
       <Route path='/login' component={LoginScreen} />
       <PrivateRoute path='/settings' component={SettingsScreen} />
+      <PrivateRoute path='/dashboard' component={DashboardScreen} />
     </Router>
   );
 }
