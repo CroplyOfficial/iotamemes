@@ -1,17 +1,17 @@
 import axios from 'axios';
 import {
   USER_LOGIN_FAIL,
-  USER_LOGIN_SUCESS,
+  USER_LOGIN_SUCCESS,
   USER_LOGIN_REQUEST,
   USER_LOGOUT,
   USER_REGISTER_FAIL,
-  USER_REGISTER_SUCESS,
+  USER_REGISTER_SUCCESS,
   USER_REGISTER_REQUEST,
   USER_UPDATE_PASSWORD_FAIL,
-  USER_UPDATE_PASSWORD_SUCESS,
+  USER_UPDATE_PASSWORD_SUCCESS,
   USER_UPDATE_PASSWORD_REQUEST,
   USER_UPDATE_FAIL,
-  USER_UPDATE_SUCESS,
+  USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
 } from '../constants/userConstants';
 
@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     );
 
     dispatch({
-      type: USER_LOGIN_SUCESS,
+      type: USER_LOGIN_SUCCESS,
       payload: data,
     });
 
@@ -76,12 +76,12 @@ export const register = (name, email, password) => async (dispatch) => {
     );
 
     dispatch({
-      type: USER_REGISTER_SUCESS,
+      type: USER_REGISTER_SUCCESS,
       payload: data,
     });
 
     dispatch({
-      type: USER_LOGIN_SUCESS,
+      type: USER_LOGIN_SUCCESS,
       payload: data,
     });
 
@@ -125,12 +125,12 @@ export const updateUserProfile =
       );
 
       dispatch({
-        type: USER_UPDATE_SUCESS,
+        type: USER_UPDATE_SUCCESS,
         payload: data,
       });
 
       dispatch({
-        type: USER_LOGIN_SUCESS,
+        type: USER_LOGIN_SUCCESS,
         payload: data,
       });
 
@@ -172,12 +172,12 @@ export const updateUserPassword = (password) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: USER_UPDATE_PASSWORD_SUCESS,
+      type: USER_UPDATE_PASSWORD_SUCCESS,
       payload: data,
     });
 
     dispatch({
-      type: USER_LOGIN_SUCESS,
+      type: USER_LOGIN_SUCCESS,
       payload: data,
     });
 
