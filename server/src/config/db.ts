@@ -7,17 +7,15 @@ import mongoose from 'mongoose';
  * @output    if all goes well then it shall print that the conneciton has taken place
  */
 
-const connectToDB = async () => {
+const connectToDB = async (connString: string): Promise<void> => {
   try {
     // await the connection from the URI
-    // Set some recommended options
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(connString, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,
     });
 
-    // print the hostname of the connection to show the connection succeeded
     console.log(`--> Connected to MongoDB on ${conn.connection.host}`);
   } catch (err) {
     console.log(`Can't connect to Mongo DB\nError: ${err}`);
