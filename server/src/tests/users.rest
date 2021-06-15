@@ -1,0 +1,8 @@
+### post 
+
+POST http://localhost:5000/api/users/authenticate
+Content-Type: application/json
+
+{
+  "code": "VKGAmwUf7xa8dlsS5k3fa36L1ZL02v"
+}
