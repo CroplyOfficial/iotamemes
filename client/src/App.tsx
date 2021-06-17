@@ -7,6 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import AuthSuccess from './pages/AuthSuccess/AuthSuccess';
+import newMeme from './pages/NewMeme/newMeme';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           }}
         />
         <Route exact path='/authenticate/success' component={AuthSuccess} />
+        <Route exact path='/newmeme' component={newMeme} />
       </Switch>
     </Router>
   );

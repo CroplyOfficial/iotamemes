@@ -22,7 +22,7 @@ const MemeSchema = new mongoose.Schema({
     default: 0,
   },
   hasVoted: {
-    tyep: Array,
+    type: Array,
     required: true,
     default: 0,
   },
@@ -33,7 +33,7 @@ const MemeSchema = new mongoose.Schema({
   },
 });
 
-/* -------- User interface -------- */
+/* -------- Meme interface -------- */
 
 export interface MemeType extends mongoose.Document {
   memeAuthor: string;
