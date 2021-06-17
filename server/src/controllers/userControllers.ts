@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { getDiscordUserInfo } from '../utils/discord';
-import User from '../models/User';
+import User, { UserType } from '../models/User';
+import { tokenize } from '../utils/jwt';
 
 const createNewUser = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -17,14 +18,20 @@ const createNewUser = asyncHandler(async (req: Request, res: Response) => {
     );
 
     if (!userExists) {
-      const user = await User.create({
+      const user: UserType = await User.create({
         discordId: userInfo.id,
         username: userInfo.username,
-        accessToken: userInfo.access_token,
-        avatar: userInfo.avatar,
+        avatar: `https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}.webp`,
       });
 
-      res.json(user);
+      const token = tokenize(user.id);
+
+      res.json({
+        token: token,
+        username: user.username,
+        discordId: user.discordId,
+        avatar: user.avatar,
+      });
     } else {
       throw new Error('User already exists');
     }
