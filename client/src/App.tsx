@@ -2,14 +2,24 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthSuccess from "./pages/AuthSuccess/AuthSuccess";
 import NewMeme from "./pages/NewMeme/NewMeme";
-import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
 import Memes from "./components/Memes/Memes";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+import { DiscordLoginButton } from "./components/Navbar/DiscordLoginButton";
 
 function App() {
+  const userLogin: any = useSelector((state: RootState) => state.userLogin);
+  const isLoggedIn = userLogin.userInfo !== null;
+
   return (
     <>
       <Router>
-        <Header />
+        <Navbar
+          extraLink={
+            isLoggedIn ? <div> Logged In </div> : <DiscordLoginButton />
+          }
+        />
         <Switch>
           <Route
             exact

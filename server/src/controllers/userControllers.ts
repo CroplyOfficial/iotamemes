@@ -44,6 +44,7 @@ const authorizeDiscordUser = asyncHandler(
         });
       }
     } catch (error) {
+      console.log(error)
       res.status(400);
       throw new Error('Failed to authorize user');
     }
