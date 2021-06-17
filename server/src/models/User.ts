@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  bio: {
+    type: String,
+    default: '',
+  },
   username: {
     type: String,
     required: true,
@@ -26,16 +30,27 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: [],
   },
+  isBanned: {
+    required: true,
+    default: false,
+    type: Boolean,
+  },
+  wallet: {
+    type: String,
+  },
 });
 
 /* -------- User interface -------- */
 
 export interface UserType extends mongoose.Document {
   discordId: string;
+  bio: string;
   username: string;
   upvotes: Number;
   avatar: string;
   violations: Array<string>;
+  isBanned: boolean;
+  wallet: string;
 }
 
 const User = mongoose.model<UserType>('User', UserSchema);

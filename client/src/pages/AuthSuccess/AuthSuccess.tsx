@@ -13,7 +13,7 @@ const AuthSuccess = ({ location, history }: any) => {
     };
 
     const { data } = await axios.post(
-      '/api/users/authenticate',
+      '/api/users/authorize',
       { code: discordCode },
       config
     );
