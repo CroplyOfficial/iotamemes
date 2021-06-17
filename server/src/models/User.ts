@@ -12,13 +12,19 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  accessToken: {
-    type: String,
+  upvotes: {
+    type: Number,
     required: true,
+    default: 0,
   },
   avatar: {
     type: String,
     required: true,
+  },
+  violations: {
+    type: Array,
+    required: true,
+    default: [],
   },
 });
 
@@ -27,8 +33,9 @@ const UserSchema = new mongoose.Schema({
 export interface UserType extends mongoose.Document {
   discordId: string;
   username: string;
-  accessToken: string;
+  upvotes: Number;
   avatar: string;
+  violations: Array<string>;
 }
 
 const User = mongoose.model<UserType>('User', UserSchema);
