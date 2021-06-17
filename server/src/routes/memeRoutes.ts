@@ -2,6 +2,9 @@ import express, { Request, Response } from 'express';
 import path from 'path';
 import multer from 'multer';
 
+import { ensureAuthorized } from '../middleware/auth';
+import { newMeme } from '../controllers/memeControllers';
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -11,7 +14,9 @@ const storage = multer.diskStorage({
   filename(req, file, cb) {
     cb(
       null,
-      `${Date.now()}${file.originalname}${path.extname(file.originalname)}`
+      `${Date.now()}${file.originalname.split('.')[0]}${path.extname(
+        file.originalname
+      )}`
     );
   },
 });
@@ -33,8 +38,6 @@ const upload: any = multer({
   },
 });
 
-router.post('/', upload.single('image'), (req: Request, res: Response) => {
-  res.send(`/${req.file.path}`);
-});
+router.route('/').post(upload.single('image'), ensureAuthorized, newMeme);
 
 export default router;
