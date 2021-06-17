@@ -1,29 +1,16 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions/userActions';
 
 const AuthSuccess = ({ location, history }: any) => {
   const query: string = location.search;
   const discordCode: string = query.split('code=')[1] || '';
 
-  const authorize = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const { data } = await axios.post(
-      '/api/users/authorize',
-      { code: discordCode },
-      config
-    );
-
-    return data;
-  };
+  const disptach: any = useDispatch();
 
   useEffect(() => {
     const auth = async () => {
-      await authorize();
+      await disptach(login(discordCode));
       history.push('/');
     };
 

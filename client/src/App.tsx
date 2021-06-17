@@ -1,13 +1,7 @@
-import React from 'react';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AuthSuccess from './pages/AuthSuccess/AuthSuccess';
-import newMeme from './pages/NewMeme/newMeme';
+import NewMeme from './pages/NewMeme/NewMeme';
 
 function App() {
   return (
@@ -23,7 +17,7 @@ function App() {
           }}
         />
         <Route exact path='/authenticate/success' component={AuthSuccess} />
-        <Route exact path='/newmeme' component={newMeme} />
+        <Route exact path='/newmeme' component={NewMeme} />
       </Switch>
     </Router>
   );
