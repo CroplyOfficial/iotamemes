@@ -18,4 +18,17 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { newMeme };
+const getMemes = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const memes = await Meme.find({}).catch((error) => {
+      res.status(404);
+      throw new Error('No memes found ;_;');
+    });
+
+    res.json(memes);
+  } catch (error) {
+    throw error;
+  }
+});
+
+export { newMeme, getMemes };
