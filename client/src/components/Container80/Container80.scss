@@ -1,0 +1,10 @@
+.container-80 {
+  margin-top: 30px;
+  padding: 0 10vw;
+}
+
+@media screen and (max-width: 900px) {
+  .container-80 {
+    padding: 0 5vw;
+  }
+}

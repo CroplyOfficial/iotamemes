@@ -1,0 +1,21 @@
+header {
+  display: flex;
+  background: #fff84f;
+  padding: 10px 10vw;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    height: 60px;
+  }
+
+  .links {
+    a {
+      color: #252525;
+      text-decoration: none;
+      font-size: 20px;
+      padding-left: 30px;
+    }
+  }
+}

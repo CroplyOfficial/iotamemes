@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACZ,UAAU,EAAE,IAAI;EAChB,OAAO,EAAE,MAAM;CAChB;;AAED,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EACjC,AAAA,aAAa,CAAC;IACZ,OAAO,EAAE,KAAK;GACf",
+    "sources": [
+        "Container80.scss"
+    ],
+    "names": [],
+    "file": "Container80.css"
+}

@@ -50,4 +50,15 @@ const authorizeDiscordUser = asyncHandler(
   }
 );
 
-export { authorizeDiscordUser };
+const getUserById = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const user = await User.findById(req.params.id).catch((error) => {
+      throw new Error('User not found');
+    });
+    res.json(user);
+  } catch (error) {
+    throw error;
+  }
+});
+
+export { authorizeDiscordUser, getUserById };

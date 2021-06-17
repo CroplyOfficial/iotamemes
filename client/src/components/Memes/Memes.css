@@ -1,0 +1,13 @@
+.memes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.memes .meme {
+  width: 30%;
+}
+/*# sourceMappingURL=Memes.css.map */
