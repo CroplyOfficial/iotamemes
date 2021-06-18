@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../actions/userActions';
+import Container80 from '../../components/Container80/Container80';
+import Loader from '../../components/Loader/Loader';
 
 const AuthSuccess = ({ location, history }: any) => {
   const query: string = location.search;
@@ -15,9 +17,15 @@ const AuthSuccess = ({ location, history }: any) => {
     };
 
     auth();
-  });
+  }, []);
 
-  return <div>{discordCode}</div>;
+  return (
+    <div>
+      <Container80>
+        <Loader />
+      </Container80>
+    </div>
+  );
 };
 
 export default AuthSuccess;

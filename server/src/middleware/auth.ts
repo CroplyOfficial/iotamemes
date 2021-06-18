@@ -15,8 +15,6 @@ const ensureAuthorized = asyncHandler(
         token = req.headers.authorization.split(' ')[1];
         const JWT_SECRET: any = process.env.JWT_SECRET;
 
-        console.log(JWT_SECRET);
-
         const decoded: any = jwt.verify(token, JWT_SECRET);
 
         req.user = await User.findById(decoded.id);

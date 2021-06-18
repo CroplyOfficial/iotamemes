@@ -38,6 +38,11 @@ const UserSchema = new mongoose.Schema({
   wallet: {
     type: String,
   },
+  likedMemes: {
+    required: true,
+    type: Array,
+    default: [],
+  },
 });
 
 /* -------- User interface -------- */
@@ -51,6 +56,7 @@ export interface UserType extends mongoose.Document {
   violations: Array<string>;
   isBanned: boolean;
   wallet: string;
+  likedMemes: Array<string>;
 }
 
 const User = mongoose.model<UserType>('User', UserSchema);

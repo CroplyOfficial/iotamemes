@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,MAAM;EACnB,aAAa,EAAE,MAAM;EACrB,eAAe,EAAE,UAAU;EAC3B,cAAc,EAAE,MAAM;EACtB,SAAS,EAAE,WAAW;EACtB,MAAM,EAAE,WAAW;EACnB,SAAS,EAAE,IAAI;CAKhB;;AAfD,AAYE,UAZQ,GAYJ,CAAC,CAAC;EACJ,KAAK,EAAE,gBAAgB;CACxB",
+    "sources": [
+        "StackGrid.scss"
+    ],
+    "names": [],
+    "file": "StackGrid.css"
+}

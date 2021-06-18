@@ -3,7 +3,7 @@ import path from 'path';
 import multer from 'multer';
 
 import { ensureAuthorized } from '../middleware/auth';
-import { newMeme, getMemes } from '../controllers/memeControllers';
+import { newMeme, getMemes, toggleLike } from '../controllers/memeControllers';
 
 const router = express.Router();
 
@@ -42,5 +42,7 @@ router
   .route('/')
   .post(upload.single('image'), ensureAuthorized, newMeme)
   .get(getMemes);
+
+router.route('/toggleLike/:id').get(ensureAuthorized, toggleLike);
 
 export default router;

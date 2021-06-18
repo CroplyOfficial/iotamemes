@@ -28,6 +28,7 @@ const authorizeDiscordUser = asyncHandler(
         const token = tokenize(user.id);
 
         res.json({
+          id: user.id,
           token: token,
           username: user.username,
           discordId: user.discordId,
@@ -38,13 +39,14 @@ const authorizeDiscordUser = asyncHandler(
 
         res.json({
           token: token,
+          id: userExists.id,
           username: userExists.username,
           discordId: userExists.discordId,
           avatar: userExists.avatar,
         });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(400);
       throw new Error('Failed to authorize user');
     }
@@ -62,4 +64,12 @@ const getUserById = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { authorizeDiscordUser, getUserById };
+const getLikedMemes = asyncHandler(async (req: Request, res: Response) => {
+  const user: any = await User.findById(req.user.id).catch((error) => {
+    console.log(error);
+    throw new Error('user not found');
+  });
+  res.json(user.likedMemes);
+});
+
+export { authorizeDiscordUser, getUserById, getLikedMemes };

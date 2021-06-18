@@ -21,11 +21,6 @@ const MemeSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  hasVoted: {
-    type: Array,
-    required: true,
-    default: 0,
-  },
   flags: {
     type: Array,
     required: true,
@@ -40,7 +35,6 @@ export interface MemeType extends mongoose.Document {
   memeTag: Array<string>;
   imgURL: string;
   upvotes: number;
-  hasVoted: Array<string>;
   flags: Array<string>;
 }
 
