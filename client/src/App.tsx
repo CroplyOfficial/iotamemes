@@ -1,9 +1,9 @@
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AuthSuccess from "./pages/AuthSuccess/AuthSuccess";
-import NewMeme from "./pages/NewMeme/NewMeme";
-import Navbar from "./components/Navbar/Navbar";
-import Memes from "./components/Memes/Memes";
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AuthSuccess from './pages/AuthSuccess/AuthSuccess';
+import NewMeme from './pages/NewMeme/NewMeme';
+import Header from './components/Header/Header';
+import MemesPage from './pages/MemesPage/MemesPage';
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import { DiscordLoginButton } from "./components/Navbar/DiscordLoginButton";
@@ -30,9 +30,9 @@ function App() {
               return null;
             }}
           />
-          <Route exact path="/authenticate/success" component={AuthSuccess} />
-          <Route exact path="/newmeme" component={NewMeme} />
-          <Route exact path="/memes" component={Memes} />
+          <Route exact path='/authenticate/success' component={AuthSuccess} />
+          <Route exact path='/newmeme' component={NewMeme} />
+          <Route exact path='/memes' component={MemesPage} />
         </Switch>
       </Router>
     </>
