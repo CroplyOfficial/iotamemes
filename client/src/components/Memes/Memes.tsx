@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Meme from './Meme/Meme';
-import Container80 from '../Container80/Container80';
-import './Memes.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Meme from "./Meme/Meme";
+import Container80 from "../Container80/Container80";
+import StackGrid from "react-stack-grid";
+import "./Memes.css";
+import { SearchBar } from "./SearchBar/SearchBar";
 
 const Memes = () => {
   const [memes, setMemes] = useState([]);
@@ -10,11 +12,11 @@ const Memes = () => {
   const getMemes = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
-    const { data } = await axios.get('/api/memes', config);
+    const { data } = await axios.get("/api/memes", config);
     setMemes(data);
   };
 
@@ -23,8 +25,9 @@ const Memes = () => {
   }, []);
 
   return (
-    <Container80>
-      <div className='memes'>
+    <div className="container is-widescreen mt-5">
+      <SearchBar />
+      <StackGrid gutterWidth={25} gutterHeight={25} columnWidth={315}>
         {memes.map((meme: any) => (
           <Meme
             key={meme._id}
@@ -34,8 +37,8 @@ const Memes = () => {
             memeTags={meme.memeTags}
           />
         ))}
-      </div>
-    </Container80>
+      </StackGrid>
+    </div>
   );
 };
 
