@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AuthSuccess from './pages/AuthSuccess/AuthSuccess';
 import NewMeme from './pages/NewMeme/NewMeme';
 import Header from './components/Header/Header';
-import Memes from './components/Memes/Memes';
+import MemesPage from './pages/MemesPage/MemesPage';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           />
           <Route exact path='/authenticate/success' component={AuthSuccess} />
           <Route exact path='/newmeme' component={NewMeme} />
-          <Route exact path='/memes' component={Memes} />
+          <Route exact path='/memes' component={MemesPage} />
         </Switch>
       </Router>
     </>
