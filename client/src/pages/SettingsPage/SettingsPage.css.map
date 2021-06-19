@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,SAAS,EAAE,KAAK;EAChB,KAAK,EAAE,IAAI;CAeZ;;AAjBD,AAIE,cAJY,CAIZ,SAAS,CAAC;EACR,OAAO,EAAE,IAAI;EACb,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,SAAS,EAAE,IAAI;CAChB;;AATH,AAWE,cAXY,CAWZ,QAAQ,CAAC;EACP,OAAO,EAAE,QAAQ;EACjB,UAAU,EAAE,OAAO;EACnB,KAAK,EAAE,KAAK;EACZ,UAAU,EAAE,MAAM;CACnB",
+    "sources": [
+        "SettingsPage.scss"
+    ],
+    "names": [],
+    "file": "SettingsPage.css"
+}
