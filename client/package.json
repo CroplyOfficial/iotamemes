@@ -25,6 +25,7 @@
     "react-scripts": "4.0.3",
     "react-share": "^4.4.0",
     "react-stack-grid": "^0.7.1",
+    "react-tagsinput": "^3.19.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "typescript": "^4.3.2"
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-stack-grid": "^0.7.0"
+    "@types/react-stack-grid": "^0.7.0",
+    "@types/react-tagsinput": "^3.19.7"
   }
 }
