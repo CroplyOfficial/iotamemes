@@ -28,7 +28,7 @@ const Memes = () => {
 
   return (
     <div className='container is-widescreen mt-5'>
-      <SearchBar setMemes={setFilteredMemes} />
+      <SearchBar memes={memes} setMemes={setFilteredMemes} />
       <Container80>
         {loading ? (
           <Loader />

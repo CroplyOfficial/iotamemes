@@ -27,7 +27,6 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
     (state: RootState) => state.getLikedMemes
   );
   const { loading, error, likedMemes }: any = likedMemesMeta;
-  console.log(likedMemes, id);
   const [isLiked, setIsLiked] = useState(
     likedMemes ? likedMemes.includes(id) : false
   );
@@ -80,7 +79,7 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
         <div className='meta'>
           <div className='tags'>
             {memeTags.length > 0 &&
-              memeTags.map((tag: string) => <p key={tag}>#{tag}</p>)}
+              memeTags.map((tag: string) => <span key={tag}>#{tag}</span>)}
           </div>
           <div className='bottom'>
             <nav className='level is-mobile'>
