@@ -1,9 +1,10 @@
-# IOTA MEMES B)
-
-IOTA Memes is a platform for sharing and rewarding memes through a simple up-voting system using Likotas. 
+<div align="center"><img src=https://github.com/CroplyOfficial/iotamemes/blob/main/client/public/images/logo.png></div>
 
 
-As simple as the title suggests, it's all about upping the meme game. Login is possible using your discord and uploads are as easy as 1, 2, 3.
+IOTA Memes is a platform for sharing and rewarding memes and art through a simple up-voting system using Likotas. 
+
+
+As simple as the title suggests, it's all about upping the meme game. Login using your discord and uploads are as easy as 1, 2, 3.
 
 
 1. Login
@@ -11,22 +12,24 @@ As simple as the title suggests, it's all about upping the meme game. Login is p
 3. Tag your image and submit
 
 
-The voting system uses the simple up votes, the more Likotas, the higher in the page your meme becomes.
+## Likotas!
+The voting system uses a simple up vote metric. The more Likotas, the higher in the page your meme becomes.
 
 
 A community monitoring flagging system is also in place, so any inappropriate content can be flagged for reveiw.
 
 
+## Sharing
 Sharing is possible using the share button, to popular networks such as Discord, Twitter, Instagram, Facebook.
 
 
-Payment is made possible through the iota-button integration and payments can be made through Firefly Wallet in IOTA tokens.
+## Donations
+Payment is made possible through the iota-button integration and payments can be made through Firefly Wallet in IOTA tokens. The donation system is 100% decentralized and all gifts, donations, and support goes directly to the creators wallet. No middleman.
 
 
-That is literally it. 
 
+That is literally it. So, get creating, get sharing, get supporting.
 
-Get creating, get sharing, get supporting.
 
 
 MUCH WOW!
