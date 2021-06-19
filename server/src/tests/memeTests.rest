@@ -1,3 +1,7 @@
+GET http://localhost:5000/api/memes/
+Content-Type: application/json
+
+###
 GET http://localhost:5000/api/memes/toggleLike/60cc7e8ac3e1394310b0d2b3
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2IwOGEzMGIxMzliMTY3MTFkZTY3MyIsImlhdCI6MTYyMzk5Mjk5OCwiZXhwIjoxNjI2NTg0OTk4fQ.UuwknbYbtNlIPhhHYOopHYRcOw7j_VBE481wS_qVs7g

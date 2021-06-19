@@ -1,10 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 /* ---------- Meme Schema ---------- */
 
 const MemeSchema = new mongoose.Schema({
   memeAuthor: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'users',
     required: true,
   },
   memeTags: {
@@ -31,7 +32,7 @@ const MemeSchema = new mongoose.Schema({
 /* -------- Meme interface -------- */
 
 export interface MemeType extends mongoose.Document {
-  memeAuthor: string;
+  memeAuthor: Schema.Types.ObjectId;
   memeTag: Array<string>;
   imgURL: string;
   upvotes: number;
