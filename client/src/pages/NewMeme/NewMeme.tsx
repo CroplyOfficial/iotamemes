@@ -7,7 +7,7 @@ import Card from '../../components/Card/Card';
 import StackGrid from '../../components/StackGrid/StackGrid';
 import './NewMeme.css';
 
-const NewMeme = () => {
+const NewMeme = ({ history }: any) => {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
   const { error, loading, userInfo }: any = userLogin;
 
@@ -36,6 +36,7 @@ const NewMeme = () => {
           setProgress(Math.round((100 * data.loaded) / data.total));
         },
       });
+      history.push(`/meme/${data._id}`);
     } catch (error) {}
   };
 

@@ -6,8 +6,9 @@ import Navbar from './components/Navbar/Navbar';
 import MemesPage from './pages/MemesPage/MemesPage';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
-import { DiscordLoginButton } from './components/Navbar/DiscordLoginButton';
 import Artists from './pages/Artists/Artists';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
+import MemePage from './pages/MemePage/MemePage';
 
 function App() {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
@@ -31,6 +32,8 @@ function App() {
           <Route exact path='/newmeme' component={NewMeme} />
           <Route exact path='/' component={MemesPage} />
           <Route exact path='/artists' component={Artists} />
+          <Route exact path='/settings' component={SettingsPage} />
+          <Route path='/meme/:id' component={MemePage} />
         </Switch>
       </Router>
     </>

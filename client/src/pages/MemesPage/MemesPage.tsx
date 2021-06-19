@@ -11,11 +11,7 @@ const MemesPage = () => {
     dispatch(getLikedMemes());
   }, [dispatch]);
 
-  return (
-    <Container80>
-      <Memes />
-    </Container80>
-  );
+  return <Memes />;
 };
 
 export default MemesPage;

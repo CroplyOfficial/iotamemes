@@ -4,13 +4,14 @@ import {
   getUserById,
   getLikedMemes,
   getAllUsers,
+  updateUserData,
 } from '../controllers/userControllers';
 
 import { ensureAuthorized } from '../middleware/auth';
 
 const router = express.Router();
 
-router.route('/').get(getAllUsers);
+router.route('/').get(getAllUsers).put(ensureAuthorized, updateUserData);
 
 router.route('/authorize').post(authorizeDiscordUser);
 
