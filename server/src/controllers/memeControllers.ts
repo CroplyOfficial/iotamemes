@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import User from '../models/User';
 
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
+  console.log(newMeme)
   try {
     const { memeTags } = req.body;
 
@@ -19,6 +20,7 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
 
     res.json(meme);
   } catch (error) {
+    console.error(error);
     throw error;
   }
 });
