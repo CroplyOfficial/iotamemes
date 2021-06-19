@@ -1,0 +1,24 @@
+.cardContainer {
+  max-width: 450px;
+  width: 100%;
+}
+
+.cardContainer .settings {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.cardContainer .message {
+  padding: 5px 15px;
+  background: #ffdd57;
+  color: white;
+  text-align: center;
+}
+/*# sourceMappingURL=SettingsPage.css.map */

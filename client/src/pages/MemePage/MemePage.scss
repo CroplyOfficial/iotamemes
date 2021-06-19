@@ -1,0 +1,34 @@
+.memePage {
+  .artist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      margin: 10px;
+      border-radius: 25px;
+      height: 50px;
+    }
+  }
+
+  .meme-img {
+    width: 100%;
+  }
+
+  .tags {
+    padding: 5px 30px;
+
+    .tag {
+      font-size: 20px;
+      color: gray;
+    }
+  }
+
+  .share {
+    display: flex;
+    margin-left: 20px;
+
+    .meme-share-icon {
+      margin: 0 5px;
+    }
+  }
+}
