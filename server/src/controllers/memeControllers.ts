@@ -21,12 +21,12 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
 
 const getMemes = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const memes = await Meme.find({}).catch((error) => {
-      res.status(404);
-      throw new Error('No memes found ;_;');
-    });
-
-    res.json(memes);
+    const memes = await Meme.find({})
+      .populate('users')
+      .exec((error, foundMemes) => {
+        if (error) throw new Error('memes not found');
+        res.json(foundMemes);
+      });
   } catch (error) {
     throw error;
   }

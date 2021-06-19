@@ -11,7 +11,7 @@ const NewMeme = () => {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
   const { error, loading, userInfo }: any = userLogin;
 
-  const [tags, setTags] = useState(['iotameme']);
+  const [tags, setTags]: any = useState();
   const [file, setFile] = useState({ file: '' });
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
@@ -45,6 +45,7 @@ const NewMeme = () => {
         <StackGrid>
           <Card>
             <form onSubmit={formSubmitHandler}>
+              {/* remove this input and replace with tags */}
               <input type='text' />
               <input
                 type='file'
@@ -58,15 +59,18 @@ const NewMeme = () => {
                 required
               />
               <input type='submit' value='upload' />
+              {uploading && (
+                <>
+                  <p>Uploading...</p>
+                  <div className='progressContainer'>
+                    <div
+                      className='bar'
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </>
+              )}
             </form>
-            {uploading && (
-              <>
-                <p>Uploading...</p>
-                <div className='progressContainer'>
-                  <div className='bar' style={{ width: `${progress}%` }}></div>
-                </div>
-              </>
-            )}
           </Card>
         </StackGrid>
       </Container80>
