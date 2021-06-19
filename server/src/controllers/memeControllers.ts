@@ -40,25 +40,27 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
     const user: any = await User.findById(meme.memeAuthor).catch((error) => {
       throw new Error('Meme-ist doesnt exist ( o _ o )');
     });
+    const self: any = await User.findById(req.user.id);
 
-    if (user.likedMemes.includes(meme._id)) {
-      const result: any = await user.likedMemes.filter(
+    if (self.likedMemes.includes(meme._id)) {
+      const result: any = await self.likedMemes.filter(
         (memeId: any) => meme.id != memeId
       );
-      user.likedMemes = result;
+      self.likedMemes = result;
       meme.upvotes--;
       user.upvotes--;
     } else {
-      user.likedMemes.push(meme._id);
+      self.likedMemes.push(meme._id);
       meme.upvotes++;
       user.upvotes++;
     }
 
     const savedMeme = await meme.save();
     const savedUser = await user.save();
+    const savedSelf = await self.save();
     res.json({
       ...savedMeme._doc,
-      likedMemes: savedUser.likedMemes,
+      likedMemes: savedSelf.likedMemes,
     });
   } catch (error) {
     throw error;
