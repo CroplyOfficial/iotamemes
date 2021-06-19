@@ -19,8 +19,6 @@ export const getMemes = () => async (dispatch: any) => {
 
     const { data } = await axios.get('/api/memes', config);
 
-    console.log(data);
-
     dispatch({
       type: GET_MEMES_SUCCESS,
       payload: data,

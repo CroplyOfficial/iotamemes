@@ -41,7 +41,7 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
       throw new Error('Meme-ist doesnt exist ( o _ o )');
     });
 
-    if (user.likedMemes.includes(meme.memeAuthor)) {
+    if (user.likedMemes.includes(meme._id)) {
       const result: any = await user.likedMemes.filter(
         (memeId: any) => meme.id != memeId
       );
@@ -49,7 +49,7 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
       meme.upvotes--;
       user.upvotes--;
     } else {
-      user.likedMemes.push(req.user._id);
+      user.likedMemes.push(meme._id);
       meme.upvotes++;
       user.upvotes++;
     }
@@ -57,8 +57,8 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
     const savedMeme = await meme.save();
     const savedUser = await user.save();
     res.json({
-      ...savedMeme,
-      likedMemes: user.likedMemes,
+      ...savedMeme._doc,
+      likedMemes: savedUser.likedMemes,
     });
   } catch (error) {
     throw error;

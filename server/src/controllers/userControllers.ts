@@ -72,4 +72,24 @@ const getLikedMemes = asyncHandler(async (req: Request, res: Response) => {
   res.json(user.likedMemes);
 });
 
-export { authorizeDiscordUser, getUserById, getLikedMemes };
+const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
+  const users: any = await User.find({}).catch((error) => {
+    res.status(404);
+    throw new Error('no meme-ists found');
+  });
+
+  const userDataToSend = users.map((user: any) => {
+    return {
+      username: user.username,
+      avatar: user.avatar,
+      id: user._id,
+      upvotes: user.upvotes,
+      totalMemes: user.totalMemes,
+      bio: user.bio,
+    };
+  });
+
+  res.json(userDataToSend);
+});
+
+export { authorizeDiscordUser, getUserById, getLikedMemes, getAllUsers };

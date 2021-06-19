@@ -7,19 +7,16 @@ import MemesPage from './pages/MemesPage/MemesPage';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { DiscordLoginButton } from './components/Navbar/DiscordLoginButton';
+import Artists from './pages/Artists/Artists';
 
 function App() {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
-  const isLoggedIn = userLogin.userInfo !== null;
+  const isLoggedIn = userLogin.userInfo || null;
 
   return (
     <>
       <Router>
-        <Navbar
-          extraLink={
-            isLoggedIn ? <div> Logged In </div> : <DiscordLoginButton />
-          }
-        />
+        <Navbar isLoggedIn={isLoggedIn} />
         <Switch>
           <Route
             exact
@@ -32,7 +29,8 @@ function App() {
           />
           <Route exact path='/authenticate/success' component={AuthSuccess} />
           <Route exact path='/newmeme' component={NewMeme} />
-          <Route exact path='/memes' component={MemesPage} />
+          <Route exact path='/' component={MemesPage} />
+          <Route exact path='/artists' component={Artists} />
         </Switch>
       </Router>
     </>

@@ -14,7 +14,6 @@ const Memes = () => {
   const dispatch = useDispatch();
 
   const memesState = useSelector((state: RootState) => state.getMemes);
-  console.log(memesState);
   const { error, loading, memes }: any = memesState;
 
   useEffect(() => {

@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
-    default: '',
+    default: 'An IOTAMEMES users',
   },
   username: {
     type: String,
@@ -38,6 +38,11 @@ const UserSchema = new mongoose.Schema({
   wallet: {
     type: String,
   },
+  totalMemes: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   likedMemes: {
     required: true,
     type: Array,
@@ -52,6 +57,7 @@ export interface UserType extends mongoose.Document {
   bio: string;
   username: string;
   upvotes: Number;
+  totalMemes: Number;
   avatar: string;
   violations: Array<string>;
   isBanned: boolean;

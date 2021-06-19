@@ -22,8 +22,13 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
     userInfo = null;
   }
 
+  const likedMemesMeta: any = useSelector(
+    (state: RootState) => state.getLikedMemes
+  );
+  const { loading, error, likedMemes }: any = likedMemesMeta;
+  console.log(likedMemes, id);
   const [isLiked, setIsLiked] = useState(
-    userInfo ? userInfo.likedMemes.includes(userInfo.id) : false
+    likedMemes ? likedMemes.includes(id) : false
   );
 
   useEffect(() => {
@@ -32,8 +37,10 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
       setUser(data);
     };
 
+    setIsLiked(likedMemes ? likedMemes.includes(id) : false);
+
     getUser(memeAuthor);
-  }, [memeAuthor]);
+  }, [memeAuthor, likedMemes]);
 
   const likeHandler = async () => {
     try {
@@ -50,7 +57,7 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
       );
       const likesNew: any = memeData.data.upvotes;
       console.log(memeData.data);
-      setIsLiked(memeData.data.hasVoted.includes(userInfo.id));
+      setIsLiked(memeData.data.likedMemes.includes(id));
       setLikes(likesNew);
     } catch (error) {
       console.log(error);
