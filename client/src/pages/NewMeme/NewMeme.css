@@ -1,0 +1,43 @@
+.progressContainer {
+  width: 300px;
+  height: 20px;
+  margin-top: 30px;
+  background: white;
+  border-radius: 3px;
+  position: relative;
+}
+
+.progressContainer .bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 20px;
+  background: #ffdd57;
+}
+
+input {
+  width: 100%;
+  max-width: 400px;
+  padding: 7.5px 12.5px;
+  border: none;
+  border-radius: 3px;
+  border: 2px solid #cecece;
+  margin-bottom: 10px;
+}
+
+input[type='submit'] {
+  background: #3d3d3d;
+  color: white;
+  border: none;
+  padding: 12.5px;
+  font-size: 20px;
+}
+
+input[type='submit']:hover {
+  cursor: pointer;
+}
+
+form {
+  padding: 30px;
+}
+/*# sourceMappingURL=NewMeme.css.map */
