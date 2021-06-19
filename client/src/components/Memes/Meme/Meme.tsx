@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../Card/Card';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -71,9 +72,11 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
           <img src={user.avatar} className='avatar' />
           <h1 className='username'>{user.username}</h1>
         </div>
-        <div className='meme-img'>
-          <img src={imgURL} />
-        </div>
+        <Link to={`/meme/${id}`}>
+          <div className='meme-img'>
+            <img src={imgURL} />
+          </div>
+        </Link>
         <div className='meta'>
           <div className='tags'>
             {memeTags.length > 0 &&

@@ -15,7 +15,9 @@
   }
 }
 
-input {
+input,
+select,
+textarea {
   width: 100%;
   max-width: 400px;
   padding: 7.5px 12.5px;
@@ -23,6 +25,7 @@ input {
   border-radius: 3px;
   border: 2px solid rgb(206, 206, 206);
   margin-bottom: 10px;
+  resize: none;
 }
 
 input[type='submit'] {

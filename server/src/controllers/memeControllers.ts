@@ -1,7 +1,7 @@
 import Meme, { MemeType } from '../models/Meme';
 import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
-import User, { UserType } from '../models/User';
+import User from '../models/User';
 
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -12,6 +12,10 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
       memeTags,
       imgURL: `/uploads/${req.file.filename}`,
     });
+
+    const user: any = await User.findById(req.user._id);
+    user.totalMemes++;
+    await user.save();
 
     res.json(meme);
   } catch (error) {
@@ -67,4 +71,11 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { newMeme, getMemes, toggleLike };
+const getMemeById = asyncHandler(async (req: Request, res: Response) => {
+  const meme = await Meme.findById(req.params.id).catch((error) => {
+    throw new error('unable to load this meme :(');
+  });
+  res.json(meme);
+});
+
+export { newMeme, getMemes, toggleLike, getMemeById };

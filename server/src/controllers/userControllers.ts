@@ -4,6 +4,12 @@ import { getDiscordUserInfo } from '../utils/discord';
 import User, { UserType } from '../models/User';
 import { tokenize } from '../utils/jwt';
 
+/**
+ *  @route  POST /api/users/authorize
+ *  @access public
+ *  @desc   route to login or register with discord user
+ */
+
 const authorizeDiscordUser = asyncHandler(
   async (req: Request, res: Response) => {
     try {
@@ -53,6 +59,12 @@ const authorizeDiscordUser = asyncHandler(
   }
 );
 
+/**
+ *  @route    GET /api/users/:id
+ *  @access   public
+ *  @desc     get the user by ID
+ */
+
 const getUserById = asyncHandler(async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.params.id).catch((error) => {
@@ -64,6 +76,12 @@ const getUserById = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+/**
+ *  @route    GET /api/users/@me/liked
+ *  @access   restricted (bearer token)
+ *  @desc     get a list of liked memes
+ */
+
 const getLikedMemes = asyncHandler(async (req: Request, res: Response) => {
   const user: any = await User.findById(req.user.id).catch((error) => {
     console.log(error);
@@ -71,6 +89,12 @@ const getLikedMemes = asyncHandler(async (req: Request, res: Response) => {
   });
   res.json(user.likedMemes);
 });
+
+/**
+ *  @route    GET /api/users
+ *  @access   public
+ *  @desc     get all the users list
+ */
 
 const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
   const users: any = await User.find({}).catch((error) => {
@@ -92,4 +116,30 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
   res.json(userDataToSend);
 });
 
-export { authorizeDiscordUser, getUserById, getLikedMemes, getAllUsers };
+/**
+ *  @route    PUT /api/users
+ *  @access   restricted (Bearer token)
+ *  @desc     find logged in user and update
+ */
+
+const updateUserData = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const { wallet, tagline }: any = req.body;
+    const user: any = await User.findById(req.user.id);
+    user.wallet = wallet;
+    user.bio = tagline;
+
+    const savedUser = await user.save();
+    res.json(savedUser);
+  } catch (error) {
+    throw new Error('Unable to update :(');
+  }
+});
+
+export {
+  authorizeDiscordUser,
+  getUserById,
+  getLikedMemes,
+  getAllUsers,
+  updateUserData,
+};
