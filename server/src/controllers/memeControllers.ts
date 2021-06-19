@@ -1,6 +1,7 @@
 import Meme, { MemeType } from '../models/Meme';
 import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
+import User, { UserType } from '../models/User';
 
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -31,4 +32,37 @@ const getMemes = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { newMeme, getMemes };
+const toggleLike = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const meme: any = await Meme.findById(req.params.id).catch((error) => {
+      throw new Error('Meme not found :(');
+    });
+    const user: any = await User.findById(meme.memeAuthor).catch((error) => {
+      throw new Error('Meme-ist doesnt exist ( o _ o )');
+    });
+
+    if (user.likedMemes.includes(meme._id)) {
+      const result: any = await user.likedMemes.filter(
+        (memeId: any) => meme.id != memeId
+      );
+      user.likedMemes = result;
+      meme.upvotes--;
+      user.upvotes--;
+    } else {
+      user.likedMemes.push(meme._id);
+      meme.upvotes++;
+      user.upvotes++;
+    }
+
+    const savedMeme = await meme.save();
+    const savedUser = await user.save();
+    res.json({
+      ...savedMeme._doc,
+      likedMemes: savedUser.likedMemes,
+    });
+  } catch (error) {
+    throw error;
+  }
+});
+
+export { newMeme, getMemes, toggleLike };

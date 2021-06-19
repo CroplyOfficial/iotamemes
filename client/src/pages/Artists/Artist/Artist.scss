@@ -1,0 +1,22 @@
+.artist {
+  padding: 0 20px;
+  text-align: center;
+  margin: 10px;
+
+  .avatar {
+    border-radius: 64px;
+  }
+
+  .username {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .userMeta {
+    color: gray;
+  }
+
+  .bio {
+    padding: 10px;
+  }
+}

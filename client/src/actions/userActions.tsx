@@ -3,6 +3,9 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_REQUEST,
+  GET_LIKED_MEMES_FAIL,
+  GET_LIKED_MEMES_REQUEST,
+  GET_LIKED_MEMES_SUCCESS,
 } from '../constants/userContants';
 
 export const login = (code: any) => async (dispatch: any) => {
@@ -34,6 +37,40 @@ export const login = (code: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getLikedMemes = () => async (dispatch: any, getState: any) => {
+  try {
+    dispatch({
+      type: GET_LIKED_MEMES_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    }: any = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get('/api/users/@me/liked', config);
+
+    dispatch({
+      type: GET_LIKED_MEMES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_LIKED_MEMES_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

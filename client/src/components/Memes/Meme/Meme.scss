@@ -1,4 +1,6 @@
 .meme {
+  margin: 10px;
+
   .memeAuthor {
     width: 100%;
     padding: 0 30px;
@@ -24,7 +26,7 @@
     margin-top: 10px;
     img {
       width: 100%;
-      height: 350px;
+      height: auto;
       object-fit: cover;
     }
   }
@@ -39,6 +41,15 @@
       p {
         margin: 5px 0;
       }
+    }
+  }
+
+  .like {
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }

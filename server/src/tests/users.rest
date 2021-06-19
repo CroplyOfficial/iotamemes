@@ -6,3 +6,14 @@ Content-Type: application/json
 {
   "code": "VKGAmwUf7xa8dlsS5k3fa36L1ZL02v"
 }
+
+#### Liked memes
+
+GET http://localhost:5000/api/users/@me/liked
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2IwOGEzMGIxMzliMTY3MTFkZTY3MyIsImlhdCI6MTYyMzk5Mjk5OCwiZXhwIjoxNjI2NTg0OTk4fQ.UuwknbYbtNlIPhhHYOopHYRcOw7j_VBE481wS_qVs7g
+
+### get all users
+
+GET http://localhost:5000/api/users/
+Content-Type: application/json

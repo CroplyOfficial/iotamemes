@@ -1,0 +1,16 @@
+.stackGrid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-flow: column wrap;
+  height: calc(130vh);
+  max-width: 80vw;
+
+  & > * {
+    width: 350px !important;
+  }
+}

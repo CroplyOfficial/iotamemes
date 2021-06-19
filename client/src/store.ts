@@ -1,10 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { userLoginReducer } from './reducers/userReducers';
+import {
+  userLoginReducer,
+  getLikedMemesReducer,
+} from './reducers/userReducers';
+import { getMemesReducer } from './reducers/memeReducers';
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
+  getMemes: getMemesReducer,
+  getLikedMemes: getLikedMemesReducer,
 });
 
 export type RootState = ReturnType<typeof reducer>;
