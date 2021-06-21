@@ -21,6 +21,7 @@ const NewMeme = ({ history }: any) => {
   console.log(error, loading, userInfo);
 
   const formSubmitHandler = async (e: any) => {
+    console.log(tags);
     e.preventDefault();
     const formData: any = new FormData();
     formData.append("image", file.file);
