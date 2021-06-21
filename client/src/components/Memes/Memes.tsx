@@ -28,12 +28,12 @@ const Memes = () => {
 
   return (
     <div className='container is-widescreen mt-5'>
-      <SearchBar setMemes={setFilteredMemes} />
+      <SearchBar memes={memes} setMemes={setFilteredMemes} />
       <Container80>
         {loading ? (
           <Loader />
         ) : filteredMemes ? (
-          <StackGrid columnWidth={300}>
+          <StackGrid columnWidth={300} monitorImagesLoaded={true}>
             {filteredMemes.map((meme: any) => (
               <Meme
                 key={meme._id}
