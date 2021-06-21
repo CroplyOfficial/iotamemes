@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import './Meme.css';
 import { RootState } from '../../../store';
 
-const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
+const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
   const [user, setUser] = useState({
     avatar: '',
     username: '',
@@ -65,18 +65,25 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
     }
   };
 
+
+  const onClickHandler = () => {
+    onClick(id);
+  }
+
   return (
-    <div className='meme'>
+    <div className='meme' onClick={onClickHandler}>
       <Card>
         <div className='memeAuthor'>
           <img src={user.avatar} className='avatar' />
           <h1 className='username'>{user.username}</h1>
         </div>
-        <Link to={`/meme/${id}`}>
+        {/*<Link to={`/meme/${id}`}>*/}
+        <div>
           <div className='meme-img'>
             <img src={imgURL} />
           </div>
-        </Link>
+        </div>
+        {/*</Link>*/}
         <div className='meta'>
           <div className='tags'>
             {memeTags.length > 0 &&

@@ -9,6 +9,7 @@ import { getMemes } from '../../actions/memeActions';
 import Container80 from '../Container80/Container80';
 import { RootState } from '../../store';
 import Loader from '../Loader/Loader';
+import {MemeModal} from './Modal/Modal';
 
 const Memes = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,14 @@ const Memes = () => {
   const { error, loading, memes }: any = memesState;
 
   const [filteredMemes, setFilteredMemes]: any = useState(memes);
+  const [activeModal, setActiveModal] = useState("");
+
+  const handleOnClick = (id: string) => {
+    setActiveModal(id);
+  }
+  const resetActiveModal = () => {
+    setActiveModal("");
+  }
 
   useEffect(() => {
     dispatch(getMemes());
@@ -33,6 +42,17 @@ const Memes = () => {
         {loading ? (
           <Loader />
         ) : filteredMemes ? (
+          <>
+            <div className="modals">
+              {filteredMemes.map((meme:any, i: number) => (
+                <MemeModal 
+                  key={meme._id || `meme-modal-${i}`} 
+                  meme={meme} 
+                  isActive={activeModal === meme._id} 
+                  exitHandler={resetActiveModal} 
+                />
+              ))}
+            </div>
           <StackGrid columnWidth={300}>
             {filteredMemes.map((meme: any) => (
               <Meme
@@ -42,9 +62,11 @@ const Memes = () => {
                 imgURL={meme.imgURL}
                 upvotes={meme.upvotes}
                 memeTags={meme.memeTags}
+                onClick={handleOnClick}
               />
             ))}
           </StackGrid>
+          </>
         ) : (
           <h1>{error}</h1>
         )}
