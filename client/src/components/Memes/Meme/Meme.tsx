@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './Meme.css';
 import { RootState } from '../../../store';
+import IotaButton from '../../IotaButton/IotaButton';
 
 const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
   const [user, setUser] = useState({
@@ -88,6 +89,7 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
                   <div className='likes'>{likes} LIKOTAS</div>
                 </div>
               </div>
+              <div></div>
               <div className='level-right'>
                 <img
                   src={isLiked ? '/images/liked.svg' : '/images/like.svg'}

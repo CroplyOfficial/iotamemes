@@ -9,6 +9,7 @@ import {
   RedditShareButton,
   TwitterShareButton,
 } from 'react-share';
+import IotaButton from '../../components/IotaButton/IotaButton';
 
 import { FacebookIcon, RedditIcon, TwitterIcon } from 'react-share';
 
@@ -58,6 +59,9 @@ const MemePage = ({ match }: any) => {
                 meme.memeTags.map((tag: string) => (
                   <span className='tag'>#{tag} </span>
                 ))}
+            </div>
+            <div className='iotaButton'>
+              <IotaButton address='asdf' />
             </div>
             <div className='share'>
               <div className='meme-share-icon'>
