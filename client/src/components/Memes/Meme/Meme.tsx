@@ -7,10 +7,11 @@ import './Meme.css';
 import { RootState } from '../../../store';
 import IotaButton from '../../IotaButton/IotaButton';
 
-const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
+
+const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
   const [user, setUser] = useState({
-    avatar: '',
-    username: '',
+    avatar: "",
+    username: "",
   });
 
   const [likes, setLikes] = useState(upvotes);
@@ -47,7 +48,7 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
@@ -65,8 +66,12 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
     }
   };
 
+  const onClickHandler = () => {
+    onClick({ id, imgURL, memeAuthor, memeTags, upvotes });
+  };
+
   return (
-    <div className='meme'>
+    <div className="meme" onClick={onClickHandler}>
       <Card>
         <div className='memeAuthor'>
           <img src={user.avatar} className='avatar' />
@@ -74,29 +79,31 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
             <h1 className='username'>{user.username}</h1>
           </Link>
         </div>
-        <Link to={`/meme/${id}`}>
-          <div className='meme-img'>
+        {/*<Link to={`/meme/${id}`}>*/}
+        <div>
+          <div className="meme-img">
             <img src={imgURL} />
           </div>
-        </Link>
-        <div className='meta'>
-          <div className='tags'>
+        </div>
+        {/*</Link>*/}
+        <div className="meta">
+          <div className="tags">
             {memeTags.length > 0 &&
               memeTags.map((tag: string) => <span key={tag}>#{tag}</span>)}
           </div>
-          <div className='bottom'>
-            <nav className='level is-mobile'>
-              <div className='level-left'>
-                <div className='level-item'>
-                  <div className='likes'>{likes} LIKOTAS</div>
+          <div className="bottom">
+            <nav className="level is-mobile">
+              <div className="level-left">
+                <div className="level-item">
+                  <div className="likes">{likes} LIKOTAS</div>
                 </div>
               </div>
               <div></div>
               <div className='level-right'>
                 <img
-                  src={isLiked ? '/images/liked.svg' : '/images/like.svg'}
+                  src={isLiked ? "/images/liked.svg" : "/images/like.svg"}
                   onClick={likeHandler}
-                  className='like'
+                  className="like"
                 />
               </div>
             </nav>
