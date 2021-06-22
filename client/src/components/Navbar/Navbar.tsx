@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { DiscordLoginButton } from './DiscordLoginButton';
 import './Header.css';
@@ -7,6 +7,31 @@ interface IProps {
   isLoggedIn?: any;
 }
 const Navbar = ({ isLoggedIn }: IProps) => {
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  //const [classNames, setClassNames] = useState({menu: "", burger: ""})
+  
+  const handleOnClick = () => {
+    setHamburgerOpen(!hamburgerOpen);
+
+    /*
+     * let {menu, burger} = classNames;
+    let newState = {...classNames};
+    if(menu === "is-active") {
+      newState.burger = "";
+      newState.menu = "";
+    }
+    else {
+      newState.burger = "is-active";
+      newState.menu = "is-active";
+    }
+
+
+    setClassNames({...newState});
+     */
+  }
+
+  const isActiveClass = "is-active";
+  const classNames = hamburgerOpen ? isActiveClass : "";
   return (
     <nav
       className='navbar is-warning'
@@ -25,7 +50,8 @@ const Navbar = ({ isLoggedIn }: IProps) => {
           </Link>
           <a
             role='button'
-            className='navbar-burger'
+            className={'navbar-burger ' + classNames}
+            onClick={handleOnClick}
             aria-label='menu'
             aria-expanded='false'
             data-target='navbarBasicExample'
@@ -36,23 +62,33 @@ const Navbar = ({ isLoggedIn }: IProps) => {
           </a>
         </div>
 
-        <div id='navbarBasicExample' className='navbar-menu'>
+        <div id='navbarBasicExample' className={'navbar-menu ' + classNames}>
           <div className='navbar-start'></div>
 
           <div className='navbar-end'>
             <div className='navbar-item'>
-              <Link to='/' className='has-text-dark'>
+              <Link 
+                to='/' className='has-text-dark'
+                onClick={handleOnClick}
+              >
                 Memes
               </Link>
             </div>
             <div className='navbar-item'>
-              <Link to='/artists' className='has-text-dark'>
+              <Link 
+                to='/artists' 
+                className='has-text-dark'
+                onClick={handleOnClick}
+              >
                 Artists
               </Link>
             </div>
             <div>
               {isLoggedIn ? (
-                <Link to='/settings'>
+                <Link 
+                  to='/settings'
+                  onClick={handleOnClick}
+                >
                   <img
                     style={{
                       height: '45px',
