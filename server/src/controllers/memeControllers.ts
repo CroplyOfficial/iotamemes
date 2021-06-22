@@ -5,7 +5,8 @@ import User from '../models/User';
 
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const { memeTags } = req.body;
+    let { memeTags }: any = req.body;
+    memeTags = memeTags.split(',');
 
     const meme: MemeType = await Meme.create({
       memeAuthor: req.user._id,
@@ -19,6 +20,7 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
 
     res.json(meme);
   } catch (error) {
+    console.error(error);
     throw error;
   }
 });

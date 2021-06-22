@@ -46,11 +46,11 @@
 
 .meme .meta .tags {
   color: gray;
-  font-size: 24px;
+  font-size: 16px;
 }
 
-.meme .meta .tags p {
-  margin: 5px 0;
+.meme .meta .tags span {
+  margin-right: 5px;
 }
 
 .meme .like {
