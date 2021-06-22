@@ -41,34 +41,6 @@ export const Media = (props: Props) => {
             {(memeTags as string[])?.map((t) => `#${t}`).join(", ")}
           </p>
         </div>
-        <nav className="level is-mobile">
-          <div className="level-left">
-            <a className="level-item">
-              <span className="icon is-small">
-                <FacebookShareButton url={`${window.location.href}meme/${id}`}>
-                  {/* <FacebookIcon size={32} round={true} /> */}
-                  <FontAwesomeIcon icon={faFacebook} />
-                </FacebookShareButton>
-              </span>
-            </a>
-            <a className="level-item">
-              <span className="icon is-small">
-                <TwitterShareButton url={`${window.location.href}meme/${id}`}>
-                  {/* <TwitterIcon size={32} round={true} /> */}
-                  <FontAwesomeIcon icon={faTwitter} />
-                </TwitterShareButton>
-              </span>
-            </a>
-            <a className="level-item">
-              <span className="icon is-small">
-                <RedditShareButton url={`${window.location.href}meme/${id}`}>
-                  {/* <RedditIcon size={32} round={true} /> */}
-                  <FontAwesomeIcon icon={faReddit} />
-                </RedditShareButton>
-              </span>
-            </a>
-          </div>
-        </nav>
       </div>
     </article>
   );
