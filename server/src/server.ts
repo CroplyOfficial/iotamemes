@@ -5,6 +5,7 @@ import path from 'path';
 import { connectToDB } from './config/db';
 import userRoutes from './routes/userRoutes';
 import memeRoutes from './routes/memeRoutes';
+import flagRoutes from './routes/flagRoutes';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/users', userRoutes);
 app.use('/api/memes', memeRoutes);
+app.use('/api/flags', flagRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 

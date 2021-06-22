@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { getDiscordUserInfo } from '../utils/discord';
 import User, { UserType } from '../models/User';
+import Meme from '../models/Meme';
 import { tokenize } from '../utils/jwt';
 
 /**
@@ -136,10 +137,31 @@ const updateUserData = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * get memes filtered by artist
+ *
+ * @route  GET /api/users/:id/memes
+ * @access public
+ */
+
+const getMemesForUser = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore
+    const memes = await Meme.find({ memeAuthor: req.params.id }).catch(error => {
+      throw new Error('unable to source memes :(');
+    //@ts-ignore
+    });
+    res.json(memes);
+  } catch (error) {
+    throw error;
+  }
+});
+
 export {
   authorizeDiscordUser,
   getUserById,
   getLikedMemes,
   getAllUsers,
   updateUserData,
+  getMemesForUser
 };

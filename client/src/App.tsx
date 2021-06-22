@@ -9,6 +9,7 @@ import { RootState } from './store';
 import Artists from './pages/Artists/Artists';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import MemePage from './pages/MemePage/MemePage';
+import UserPage from './pages/UserPage/UserPage';
 
 function App() {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
@@ -34,6 +35,7 @@ function App() {
           <Route exact path='/artists' component={Artists} />
           <Route exact path='/settings' component={SettingsPage} />
           <Route path='/meme/:id' component={MemePage} />
+          <Route path='/user/:id' component={UserPage} />
         </Switch>
       </Router>
     </>
