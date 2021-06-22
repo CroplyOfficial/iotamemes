@@ -4,9 +4,9 @@ import { Request, Response } from 'express';
 import User from '../models/User';
 
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
-  console.log(newMeme)
   try {
-    const { memeTags } = req.body;
+    let { memeTags }: any = req.body;
+    memeTags = memeTags.split(',');
 
     const meme: MemeType = await Meme.create({
       memeAuthor: req.user._id,

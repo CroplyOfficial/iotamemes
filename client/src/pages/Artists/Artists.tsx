@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Container80 from '../../components/Container80/Container80';
 import Artist from './Artist/Artist';
 import axios from 'axios';
-import StackGrid from '../../components/StackGrid/StackGrid';
+import StackGrid from 'react-stack-grid';
 
 const Artists = () => {
   const [artists, setArtists] = useState([]);
@@ -18,7 +18,7 @@ const Artists = () => {
   }, []);
   return (
     <Container80>
-      <StackGrid>
+      <StackGrid columnWidth={300} monitorImagesLoaded={true}>
         {artists.map((artist: any) => (
           <Artist
             username={artist.username}

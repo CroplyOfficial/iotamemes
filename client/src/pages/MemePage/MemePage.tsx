@@ -11,6 +11,8 @@ import {
 } from 'react-share';
 import { useSelector } from 'react-redux';
 import Modal from '../../components/Modal/Modal';
+import IotaButton from '../../components/IotaButton/IotaButton';
+
 import { FacebookIcon, RedditIcon, TwitterIcon } from 'react-share';
 import { RootState } from '../../store';
 
@@ -96,8 +98,12 @@ const MemePage = ({ match }: any) => {
                 meme.memeTags.map((tag: string) => (
                   <span className='tag'>#{tag} </span>
                 ))}
-              </div>
+              
+            </div>
             <button onClick={flagMeme}>FLAG</button>
+            <div className='iotaButton'>
+              <IotaButton address={artist.wallet} />
+            </div>
             <div className='share'>
               <div className='meme-share-icon'>
                 <FacebookShareButton url={window.location.href}>
