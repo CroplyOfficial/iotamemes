@@ -16,7 +16,7 @@ interface IProps {
 }
 export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
   const classNames = isActive ? "is-active" : "";
-  const { imgURL, memeAuthor, memeTags, upvotes, _id } = meme;
+  const { imgURL, memeAuthor, memeTags, upvotes, id } = meme;
 
   // Populate if you need it
   const fetchAuthor = (_id: string) => {
@@ -46,21 +46,21 @@ export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
           <div className="level is-mobile">
             <div className="level-item mr-1">
               <div className="meme-share-icon">
-                <FacebookShareButton url={`${window.location.href}`}>
+                <FacebookShareButton url={`${window.location.href}meme/${id}`}>
                   <FacebookIcon size={32} round={true} />
                 </FacebookShareButton>
               </div>
             </div>
             <div className="level-item mr-1">
               <div className="meme-share-icon">
-                <TwitterShareButton url={`${window.location.href}`}>
+                <TwitterShareButton url={`${window.location.href}meme/${id}`}>
                   <TwitterIcon size={32} round={true} />
                 </TwitterShareButton>
               </div>
             </div>
             <div className="level-item mr-1">
               <div className="meme-share-icon">
-                <RedditShareButton url={`${window.location.href}`}>
+                <RedditShareButton url={`${window.location.href}meme/${id}`}>
                   <RedditIcon size={32} round={true} />
                 </RedditShareButton>
               </div>
