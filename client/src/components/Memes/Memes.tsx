@@ -10,6 +10,7 @@ import Container80 from "../Container80/Container80";
 import { RootState } from "../../store";
 import Loader from "../Loader/Loader";
 import { MemeModal } from "./Modal/Modal";
+import { MemeModal2 } from "./Modal/Modal2";
 
 const Memes = () => {
   const dispatch = useDispatch();
@@ -18,13 +19,15 @@ const Memes = () => {
   const { error, loading, memes }: any = memesState;
 
   const [filteredMemes, setFilteredMemes]: any = useState(memes);
-  const [activeModal, setActiveModal] = useState<Record<string, any>>({});
+  const [activeModal, setActiveModal] = useState<Record<string, any>>({
+    user: {},
+  });
 
   const handleOnClick = (meme: Record<string, any>) => {
     setActiveModal(meme);
   };
   const resetActiveModal = () => {
-    setActiveModal({});
+    setActiveModal({ memeTags: [], user: {} });
   };
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const Memes = () => {
   }, [memes]);
 
   return (
-    <div className='container is-widescreen mt-5'>
+    <div className="container is-widescreen mt-5">
       <SearchBar memes={memes} setMemes={setFilteredMemes} />
       <Container80>
         {loading ? (
@@ -44,14 +47,13 @@ const Memes = () => {
         ) : filteredMemes ? (
           <>
             {
-              <MemeModal
+              <MemeModal2
                 meme={activeModal}
                 isActive={activeModal.id ? true : false}
                 exitHandler={resetActiveModal}
-
               />
             }
-            <StackGrid columnWidth={300}  monitorImagesLoaded={true}>
+            <StackGrid columnWidth={300} monitorImagesLoaded={true}>
               {filteredMemes.map((meme: any) => (
                 <Meme
                   key={meme._id}

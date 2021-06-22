@@ -16,7 +16,8 @@ interface IProps {
 }
 export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
   const classNames = isActive ? "is-active" : "";
-  const { imgURL, memeAuthor, memeTags, upvotes, id } = meme;
+  const { imgURL, memeAuthor, memeTags, upvotes, id, user } = meme;
+  console.log(user);
 
   // Populate if you need it
   const fetchAuthor = (_id: string) => {
@@ -29,7 +30,15 @@ export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
       <div className="modal-background" onClick={exitHandler}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{memeAuthor}</p>
+          <div className="image is-64x64">
+            <img
+              src={
+                user.avatar ||
+                "https://bulma.io/images/placeholders/128x128.png"
+              }
+            />
+          </div>
+          <p className="modal-card-title">{user.username}</p>
           <button
             className="delete"
             aria-label="close"
@@ -43,6 +52,7 @@ export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
           {/* <!-- Content ... --> */}
         </section>
         <footer className="modal-card-foot">
+          {(memeTags as string[])?.map((t) => `#${t}`).join(", ")}
           <div className="level is-mobile">
             <div className="level-item mr-1">
               <div className="meme-share-icon">

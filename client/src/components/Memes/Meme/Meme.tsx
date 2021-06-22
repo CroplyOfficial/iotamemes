@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Card from '../../Card/Card';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import './Meme.css';
-import { RootState } from '../../../store';
-import IotaButton from '../../IotaButton/IotaButton';
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Card from "../../Card/Card";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import "./Meme.css";
+import { RootState } from "../../../store";
+import IotaButton from "../../IotaButton/IotaButton";
 
 const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
   const [user, setUser] = useState({
@@ -67,27 +66,27 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
   };
 
   const onClickHandler = () => {
-    onClick({ id, imgURL, memeAuthor, memeTags, upvotes });
+    onClick({ id, imgURL, memeAuthor, memeTags, upvotes, user });
   };
 
   return (
-    <div className="meme" onClick={onClickHandler}>
+    <div className="meme">
       <Card>
-        <div className='memeAuthor'>
-          <img src={user.avatar} className='avatar' />
+        <div className="memeAuthor" onClick={onClickHandler}>
+          <img src={user.avatar} className="avatar" />
           <Link to={`/user/${memeAuthor}`}>
-            <h1 className='username'>{user.username}</h1>
+            <h1 className="username">{user.username}</h1>
           </Link>
         </div>
         {/*<Link to={`/meme/${id}`}>*/}
-        <div>
+        <div onClick={onClickHandler}>
           <div className="meme-img">
             <img src={imgURL} />
           </div>
         </div>
         {/*</Link>*/}
         <div className="meta">
-          <div className="tags">
+          <div className="tags" onClick={onClickHandler}>
             {memeTags.length > 0 &&
               memeTags.map((tag: string) => <span key={tag}>#{tag}</span>)}
           </div>
@@ -99,7 +98,7 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
                 </div>
               </div>
               <div></div>
-              <div className='level-right'>
+              <div className="level-right">
                 <img
                   src={isLiked ? "/images/liked.svg" : "/images/like.svg"}
                   onClick={likeHandler}
@@ -113,9 +112,5 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
     </div>
   );
 };
-
-
-
-
 
 export default Meme;
