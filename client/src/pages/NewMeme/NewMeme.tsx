@@ -6,12 +6,14 @@ import Container80 from '../../components/Container80/Container80';
 import Card from '../../components/Card/Card';
 import StackGrid from '../../components/StackGrid/StackGrid';
 import './NewMeme.css';
+import InputTags from 'react-tagsinput';
+import 'react-tagsinput/react-tagsinput.css';
 
 const NewMeme = ({ history }: any) => {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
   const { error, loading, userInfo }: any = userLogin;
 
-  const [tags, setTags]: any = useState();
+  const [tags, setTags]: any = useState<string[]>([]);
   const [file, setFile] = useState({ file: '' });
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
@@ -19,6 +21,7 @@ const NewMeme = ({ history }: any) => {
   console.log(error, loading, userInfo);
 
   const formSubmitHandler = async (e: any) => {
+    console.log(tags);
     e.preventDefault();
     const formData: any = new FormData();
     formData.append('image', file.file);
@@ -37,7 +40,9 @@ const NewMeme = ({ history }: any) => {
         },
       });
       history.push(`/meme/${data._id}`);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -47,7 +52,7 @@ const NewMeme = ({ history }: any) => {
           <Card>
             <form onSubmit={formSubmitHandler}>
               {/* remove this input and replace with tags */}
-              <input type='text' />
+              <InputTags onChange={(tags) => setTags(tags)} value={tags} />
               <input
                 type='file'
                 name='image'

@@ -5,6 +5,7 @@ import {
   getLikedMemes,
   getAllUsers,
   updateUserData,
+  getMemesForUser
 } from '../controllers/userControllers';
 
 import { ensureAuthorized } from '../middleware/auth';
@@ -17,6 +18,9 @@ router.route('/authorize').post(authorizeDiscordUser);
 
 router.route('/:id').get(getUserById);
 
+router.route('/:id/memes').get(getMemesForUser)
+
 router.route('/@me/liked').get(ensureAuthorized, getLikedMemes);
+
 
 export default router;

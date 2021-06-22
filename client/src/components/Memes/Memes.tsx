@@ -36,8 +36,8 @@ const Memes = () => {
   }, [memes]);
 
   return (
-    <div className="container is-widescreen mt-5">
-      <SearchBar setMemes={setFilteredMemes} />
+    <div className='container is-widescreen mt-5'>
+      <SearchBar memes={memes} setMemes={setFilteredMemes} />
       <Container80>
         {loading ? (
           <Loader />
@@ -48,9 +48,10 @@ const Memes = () => {
                 meme={activeModal}
                 isActive={activeModal.id ? true : false}
                 exitHandler={resetActiveModal}
+
               />
             }
-            <StackGrid columnWidth={300}>
+            <StackGrid columnWidth={300}  monitorImagesLoaded={true}>
               {filteredMemes.map((meme: any) => (
                 <Meme
                   key={meme._id}
