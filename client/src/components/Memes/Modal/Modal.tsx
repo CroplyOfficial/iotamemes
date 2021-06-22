@@ -22,7 +22,7 @@ export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
   const fetchAuthor = (_id: string) => {
     return {};
   };
-  console.log(window.location);
+  console.log(window.location.href);
 
   return (
     <div className={"modal " + classNames}>
@@ -43,7 +43,7 @@ export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
           {/* <!-- Content ... --> */}
         </section>
         <footer className="modal-card-foot">
-          <div className="level">
+          <div className="level is-mobile">
             <div className="level-item mr-1">
               <div className="meme-share-icon">
                 <FacebookShareButton url={`${window.location.href}`}>
