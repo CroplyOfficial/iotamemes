@@ -70,7 +70,9 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
       <Card>
         <div className='memeAuthor'>
           <img src={user.avatar} className='avatar' />
-          <h1 className='username'>{user.username}</h1>
+          <Link to={`/user/${memeAuthor}`}>
+            <h1 className='username'>{user.username}</h1>
+          </Link>
         </div>
         <Link to={`/meme/${id}`}>
           <div className='meme-img'>
@@ -104,5 +106,9 @@ const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes }: any) => {
     </div>
   );
 };
+
+
+
+
 
 export default Meme;

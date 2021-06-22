@@ -4,7 +4,7 @@ const IotaButton = ({ address }: any) => {
       {/* @ts-ignore */}
       <iota-button
         address={address}
-        currency='EUR'
+        currency='USD'
         label='Donate to Creator'
         type='donation'
       >

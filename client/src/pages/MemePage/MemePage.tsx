@@ -9,14 +9,19 @@ import {
   RedditShareButton,
   TwitterShareButton,
 } from 'react-share';
+import { useSelector } from 'react-redux';
+import Modal from '../../components/Modal/Modal';
 import IotaButton from '../../components/IotaButton/IotaButton';
 
 import { FacebookIcon, RedditIcon, TwitterIcon } from 'react-share';
+import { RootState } from '../../store';
 
 const MemePage = ({ match }: any) => {
   const [loading, setLoading] = useState(true);
   const [meme, setMeme]: any = useState();
   const [artist, setArtist]: any = useState();
+  const [visible, setVisible]: any = useState(false);
+  const [message, setMessage]: any = useState('flagging meme');
 
   const config = {
     headers: {
@@ -38,6 +43,35 @@ const MemePage = ({ match }: any) => {
     setLoading(false);
   };
 
+  const userLogin = useSelector((state: RootState) => state.userLogin);
+  const { userInfo }: any = userLogin ? userLogin : null;
+
+  /* -------------------- flagging stuff -------------------- */
+
+  const flagMeme = async () => {
+    if (userInfo) {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${userInfo.token}`
+        }
+      }
+      try {
+        const flag = await axios.post('/api/flags', { memeId: match.params.id }, config)
+        setVisible(true);
+        setMessage('Reported meme successfully :)')
+      } catch (error) {
+        setVisible(true)
+        setMessage("unable to create new report for this meme, this probably means that you have already reported this meme") 
+      }
+    } else {
+      setVisible(true);
+      setMessage('You need to log in to report a meme');
+    }
+  }
+
+  /* ------------------ end flagging stuff ------------------ */
+
   useEffect(() => {
     getMeme();
   }, []);
@@ -49,6 +83,11 @@ const MemePage = ({ match }: any) => {
           <Loader />
         ) : meme && artist ? (
           <div className='memePage'>
+
+            <Modal visible={visible} setVisible={setVisible}>
+              {message}
+            </Modal>
+
             <div className='artist'>
               <img src={artist.avatar} alt={artist.username} />
               <div className='username'>{artist.username}</div>
@@ -59,9 +98,11 @@ const MemePage = ({ match }: any) => {
                 meme.memeTags.map((tag: string) => (
                   <span className='tag'>#{tag} </span>
                 ))}
+              
             </div>
+            <button onClick={flagMeme}>FLAG</button>
             <div className='iotaButton'>
-              <IotaButton address='asdf' />
+              <IotaButton address={artist.wallet} />
             </div>
             <div className='share'>
               <div className='meme-share-icon'>
