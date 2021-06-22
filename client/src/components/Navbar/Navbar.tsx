@@ -19,7 +19,7 @@ const Navbar = ({ isLoggedIn }: IProps) => {
   const classNames = hamburgerOpen ? isActiveClass : "";
   return (
     <nav
-      className="navbar is-warning"
+      className="navbar is-warning is-fixed-top"
       role="navigation"
       aria-label="main navigation"
     >
