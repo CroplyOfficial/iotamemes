@@ -4,16 +4,15 @@ import {
   faReddit,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  FacebookIcon,
   FacebookShareButton,
-  RedditIcon,
   RedditShareButton,
-  TwitterIcon,
   TwitterShareButton,
 } from "react-share";
+import "./modal.css";
+import axios from "axios";
 
 interface Props {
   meme: Record<string, any>;
@@ -26,6 +25,11 @@ export const MemeModal2 = (props: Props) => {
 
   const src = imgURL || "https://bulma.io/images/placeholders/1280x960.png";
   const classNames = isActive ? "is-active" : "";
+
+  const handleOnClickFlag = async () => {
+    // TODO
+    const data = axios.put(`/post/${id}/flag`).then((res) => res.data);
+  };
   return (
     <div className={"modal " + classNames}>
       <div className="modal-background" onClick={exitHandler}></div>
@@ -45,12 +49,20 @@ export const MemeModal2 = (props: Props) => {
             }}
           >
             <div className="level-right">
+              <div className="level-item">
+                <FontAwesomeIcon
+                  color={"#3273dc"}
+                  icon={faFlag}
+                  className="icon is-medium hover-grey"
+                  style={{ marginBottom: "0.25rem", cursor: "pointer" }}
+                  onClick={handleOnClickFlag}
+                />
+              </div>
               <a className="level-item">
                 <span>
                   <FacebookShareButton
                     url={`${window.location.href}meme/${id}`}
                   >
-                    {/* <FacebookIcon size={32} round={true} /> */}
                     <FontAwesomeIcon
                       icon={faFacebook}
                       className="icon is-medium"
@@ -61,7 +73,6 @@ export const MemeModal2 = (props: Props) => {
               <a className="level-item">
                 <span>
                   <TwitterShareButton url={`${window.location.href}meme/${id}`}>
-                    {/* <TwitterIcon size={32} round={true} /> */}
                     <FontAwesomeIcon
                       icon={faTwitter}
                       className="icon is-medium"
@@ -72,7 +83,6 @@ export const MemeModal2 = (props: Props) => {
               <a className="level-item">
                 <span>
                   <RedditShareButton url={`${window.location.href}meme/${id}`}>
-                    {/* <RedditIcon size={32} round={true} /> */}
                     <FontAwesomeIcon
                       icon={faReddit}
                       className="icon is-medium"
