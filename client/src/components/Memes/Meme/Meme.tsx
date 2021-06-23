@@ -7,7 +7,23 @@ import "./Meme.css";
 import { RootState } from "../../../store";
 import IotaButton from "../../IotaButton/IotaButton";
 
-const Meme = ({ id, imgURL, memeAuthor, memeTags, upvotes, onClick }: any) => {
+interface MemeProps {
+  id: string;
+  imgURL: string;
+  memeAuthor: any;
+  memeTags: string[];
+  upvotes: number;
+  onClick: (...params: any) => void;
+}
+
+const Meme = ({
+  id,
+  imgURL,
+  memeAuthor,
+  memeTags,
+  upvotes,
+  onClick,
+}: MemeProps) => {
   const [user, setUser] = useState({
     avatar: "",
     username: "",
