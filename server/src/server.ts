@@ -7,6 +7,8 @@ import userRoutes from './routes/userRoutes';
 import memeRoutes from './routes/memeRoutes';
 import flagRoutes from './routes/flagRoutes';
 
+import { errorHandler } from './middleware/errors';
+
 dotenv.config();
 
 connectToDB(process.env.MONGO_URI || '');
@@ -19,6 +21,8 @@ app.use('/api/memes', memeRoutes);
 app.use('/api/flags', flagRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

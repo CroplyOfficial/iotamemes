@@ -100,27 +100,33 @@ const MemePage = ({ match }: any) => {
                 ))}
               
             </div>
-            <button onClick={flagMeme}>FLAG</button>
             <div className='iotaButton'>
               <IotaButton address={artist.wallet} />
             </div>
-            <div className='share'>
-              <div className='meme-share-icon'>
-                <FacebookShareButton url={window.location.href}>
-                  <FacebookIcon size={32} round={true} />
-                </FacebookShareButton>
+            <div className="bottomMeme">
+              <div className='share'>
+                <div className='meme-share-icon'>
+                  <FacebookShareButton url={window.location.href}>
+                    <FacebookIcon size={32} round={true} />
+                  </FacebookShareButton>
+                </div>
+                <div className='meme-share-icon'>
+                  <TwitterShareButton url={window.location.href}>
+                    <TwitterIcon size={32} round={true} />
+                  </TwitterShareButton>
+                </div>
+                <div className='meme-share-icon'>
+                  <RedditShareButton url={window.location.href}>
+                    <RedditIcon size={32} round={true} />
+                  </RedditShareButton>
+                </div>
+                <img
+                  src="/images/flag.svg" 
+                  onClick={flagMeme} 
+                  style={{height: '30px', marginLeft: '30px'}}
+                />
               </div>
-              <div className='meme-share-icon'>
-                <TwitterShareButton url={window.location.href}>
-                  <TwitterIcon size={32} round={true} />
-                </TwitterShareButton>
-              </div>
-              <div className='meme-share-icon'>
-                <RedditShareButton url={window.location.href}>
-                  <RedditIcon size={32} round={true} />
-                </RedditShareButton>
-              </div>
-            </div>
+          </div>
           </div>
         ) : (
           <div className='message'>Unable to load meme </div>

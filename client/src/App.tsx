@@ -10,6 +10,10 @@ import Artists from './pages/Artists/Artists';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import MemePage from './pages/MemePage/MemePage';
 import UserPage from './pages/UserPage/UserPage';
+import TermsPage from './pages/TermsPage/TermsPage';
+import PrivacyPage from './pages/PrivacyPage/PrivacyPage';
+import ReportsPage from './pages/ReportsPage/ReportsPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 
 function App() {
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
@@ -33,9 +37,13 @@ function App() {
           <Route exact path='/newmeme' component={NewMeme} />
           <Route exact path='/' component={MemesPage} />
           <Route exact path='/artists' component={Artists} />
+          <Route exact path='/terms' component={TermsPage} />
+          <Route exact path='/privacy' component={PrivacyPage} />
+          <Route exact path ='/flags' component={ReportsPage} />
           <Route exact path='/settings' component={SettingsPage} />
           <Route path='/meme/:id' component={MemePage} />
           <Route path='/user/:id' component={UserPage} />
+          <Route exact path='/about' component={AboutPage} />
         </Switch>
       </Router>
     </>

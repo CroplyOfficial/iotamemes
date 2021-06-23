@@ -3,6 +3,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_REQUEST,
+  USER_LOGOUT,
   GET_LIKED_MEMES_FAIL,
   GET_LIKED_MEMES_REQUEST,
   GET_LIKED_MEMES_SUCCESS,
@@ -43,6 +44,11 @@ export const login = (code: any) => async (dispatch: any) => {
           : error.message,
     });
   }
+};
+
+export const logout = () => (dispatch: any) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT });
 };
 
 export const getLikedMemes = () => async (dispatch: any, getState: any) => {

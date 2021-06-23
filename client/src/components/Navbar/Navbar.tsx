@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { DiscordLoginButton } from './DiscordLoginButton';
 import './Header.css';
+import IotaButton from '../../components/IotaButton/IotaButton';
+
 
 interface IProps {
   isLoggedIn?: any;
@@ -83,23 +85,52 @@ const Navbar = ({ isLoggedIn }: IProps) => {
                 Artists
               </Link>
             </div>
-            <div>
-              {isLoggedIn ? (
+            <div className='navbar-item'>
+              <Link 
+                to='/about' 
+                className='has-text-dark'
+                onClick={handleOnClick}
+              >
+                About
+              </Link>
+            </div>
+
+          
+            
+            {isLoggedIn && isLoggedIn.isAdmin && (
+              <div className='navbar-item'>
                 <Link 
-                  to='/settings'
+                  to="/flags"
+                  className="has-text-dark"
                   onClick={handleOnClick}
                 >
-                  <img
-                    style={{
-                      height: '45px',
-                      width: '45px',
-                      borderRadius: '22.5px',
-                      marginTop: '7.5px',
-                      marginLeft: '15px',
-                    }}
-                    src={isLoggedIn.avatar}
-                  />
+                  Reports
                 </Link>
+              </div>
+            )}
+
+            <div>
+
+
+              {isLoggedIn ? (
+                <>
+                <Link 
+
+                    to='/settings'
+                    onClick={handleOnClick}
+                  >
+                    <img
+                      style={{
+                        height: '45px',
+                        width: '45px',
+                        borderRadius: '22.5px',
+                        marginTop: '7.5px',
+                        marginLeft: '15px',
+                      }}
+                      src={isLoggedIn.avatar}
+                    />
+                  </Link>
+                </>
               ) : (
                 <DiscordLoginButton />
               )}

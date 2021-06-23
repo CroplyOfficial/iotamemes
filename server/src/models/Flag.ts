@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const FlagSchema = new mongoose.Schema({
+  username: {
+    type: String, 
+    required: true
+  },
   user: {
     type: mongoose.Types.ObjectId,
     required: true
@@ -24,6 +28,7 @@ const FlagSchema = new mongoose.Schema({
 /* -------------------- interface ------------------------- */
 
 export interface FlagType extends mongoose.Document {
+  username: string;
   user: mongoose.Types.ObjectId;
   meme: mongoose.Types.ObjectId;
   flagCount: number;

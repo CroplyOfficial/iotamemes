@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './SettingsPage.css';
 import { RootState } from '../../store';
+import { logout } from '../../actions/userActions';
+import { useDispatch } from 'react-redux';
 
-const SettingsPage = () => {
+const SettingsPage = ({ history }: any) => {
   const [user, setUser]: any = useState();
   const [message, setMessage]: any = useState();
   const [wallet, setWallet]: any = useState();
@@ -15,6 +17,8 @@ const SettingsPage = () => {
 
   const userLogin = useSelector((state: RootState) => state.userLogin);
   const { userInfo }: any = userLogin;
+
+  const dispatch = useDispatch();
 
   const getUserData = async () => {
     try {
@@ -32,6 +36,11 @@ const SettingsPage = () => {
       console.error(error);
     }
   };
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    history.push('/')
+  }
 
   const formSubmitHandler = async (e: any) => {
     try {
@@ -91,6 +100,9 @@ const SettingsPage = () => {
                   ></textarea>
                   <br />
                   <input type='submit' value='UPDATE' />
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <button type='button' style={{ padding: '10px 30px', background: 'red', color: 'white', border: 'none', borderRadius: '5px' }} onClick={logoutHandler}>Logout</button>
+                  </div>
                 </form>
               </div>
             </div>

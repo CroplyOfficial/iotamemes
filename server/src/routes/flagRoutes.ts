@@ -1,14 +1,23 @@
 import express from 'express';
-import { ensureAuthorized } from '../middleware/auth';
-import { createFlag, removeFlag, removeMeme } from '../controllers/flagControllers';
+import { 
+  ensureIsAdmin,
+  ensureAuthorized 
+} from '../middleware/auth';
+import { 
+  createFlag, 
+  removeFlag, 
+  removeMeme,
+  getAllFlags
+} from '../controllers/flagControllers';
 
 const router = express.Router();
 
 router.route('/')
+  .get(ensureAuthorized, ensureIsAdmin, getAllFlags)
   .post(ensureAuthorized, createFlag)
-  .delete(ensureAuthorized, removeFlag)
+  .delete(ensureAuthorized, ensureIsAdmin, removeFlag)
 
 router.route('/meme')
-  .delete(ensureAuthorized, removeMeme)
+  .delete(ensureAuthorized, ensureIsAdmin, removeMeme)
 
 export default router;
