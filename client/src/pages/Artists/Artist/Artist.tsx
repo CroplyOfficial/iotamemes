@@ -1,12 +1,15 @@
 import Card from '../../../components/Card/Card';
+import { Link } from 'react-router-dom';
 import './Artist.css';
 
-const Artist = ({ username, avatar, bio, upvotes, totalMemes }: any) => {
+const Artist = ({ id, username, avatar, bio, upvotes, totalMemes }: any) => {
   return (
     <div className='artist'>
       <Card>
         <img src={avatar} className='avatar' />
-        <div className='username'>{username}</div>
+        <Link to={`/user/${id}`}>
+          <div className='username'>{username}</div>
+        </Link>
         <div className='userMeta'>
           {upvotes} Likotas - {totalMemes} Memes
         </div>

@@ -40,6 +40,7 @@ const authorizeDiscordUser = asyncHandler(
           username: user.username,
           discordId: user.discordId,
           avatar: user.avatar,
+          isAdmin: user.isAdmin
         });
       } else {
         const token = tokenize(userExists.id);
@@ -50,6 +51,7 @@ const authorizeDiscordUser = asyncHandler(
           username: userExists.username,
           discordId: userExists.discordId,
           avatar: userExists.avatar,
+          isAdmin: userExists.isAdmin
         });
       }
     } catch (error) {

@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 /* ---------- User Schema ---------- */
 
 const UserSchema = new mongoose.Schema({
+  isAdmin: {
+    type: Boolean, 
+    required: true, 
+    default: false
+  },
   discordId: {
     type: String,
     unique: true,
@@ -10,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
-    default: 'An IOTAMEMES users',
+    default: 'An IOTAMEMES user',
   },
   username: {
     type: String,
@@ -53,6 +58,7 @@ const UserSchema = new mongoose.Schema({
 /* -------- User interface -------- */
 
 export interface UserType extends mongoose.Document {
+  isAdmin: boolean;
   discordId: string;
   bio: string;
   username: string;

@@ -27,6 +27,7 @@ const Artists = () => {
             avatar={artist.avatar}
             key={artist.id}
             totalMemes={artist.totalMemes}
+            id={artist.id}
           />
         ))}
       </StackGrid>

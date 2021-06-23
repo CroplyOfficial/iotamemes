@@ -1,0 +1,31 @@
+.aboutHeading {
+  font-size: 1.25rem;
+  color: #2d2d2d;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+p {
+  padding: 5px 0 10px 0;
+}
+
+strong {
+  padding-top: 20px;
+}
+
+ol {
+  padding: 10px 0;
+  padding-left: 30px;
+  padding-bottom: 30px;
+}
+
+.aboutBottom {
+  display: flex;
+  justify-content: space-between;
+  transform: translateX(-30px);
+  margin-top: 30px
+}
+
+.aboutBottom img {
+  height: 60px;
+}

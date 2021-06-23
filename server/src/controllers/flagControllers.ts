@@ -6,6 +6,26 @@ import Meme from "../models/Meme";
 import fs from 'fs';
 import path from 'path';
 
+/**
+ * get all the flags that have been raised. each flag belongs to a 
+ * meme so we can see each meme by fetching them later. and taking an 
+ * action.
+ *
+ * @route  GET /api/flags
+ * @access restricted [admin only]
+ */
+
+const getAllFlags = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const flags = await Flag.find({}).catch((error: any) => {
+      throw new Error('no flags found');
+    });
+    res.json(flags);
+  } catch (error) {
+    throw error;
+  }
+});
+
 /** 
  * create a new flag for an account on grounds of some violation 
  * right now it is still pretty barebones but this just exists to 
@@ -18,16 +38,20 @@ import path from 'path';
 
 const createFlag = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const userId = req.user._id;
     const { memeId }: any = req.body;
     const flagExists = await Flag.findOne({ meme: memeId });
     if (!flagExists) {
       // meme has not been flagged yet, i.e. flag doesn't exist yet 
       // so create a new one 
+      const meme: any = await Meme.findById(memeId).catch((error) => {
+        throw new Error('meme not found');
+      });
+      const userId = meme.memeAuthor;
       const user: any = await User.findById(userId).catch((error) => {
         throw new Error(`user not found`);
       });
       const flag = await Flag.create({
+        username: user.username,
         user: userId,
         meme: memeId,
         flaggers: [req.user._id]
@@ -110,4 +134,4 @@ const removeMeme = asyncHandler(async (req: Request, res: Response) => {
   }
 })
 
-export { createFlag, removeFlag, removeMeme };
+export { createFlag, removeFlag, removeMeme, getAllFlags };

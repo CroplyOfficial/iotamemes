@@ -3,8 +3,9 @@
 }
 
 .meme .memeAuthor {
+  transform: translateY(-5px);
   width: 100%;
-  padding: 0 30px;
+  padding: 0 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -17,16 +18,20 @@
 }
 
 .meme .memeAuthor .avatar {
-  height: 50px;
+  height: 40px;
   margin-right: 20px;
-  width: 50px;
-  border-radius: 30px;
+  width: 40px;
+  border-radius: 20px;
 }
 
 .meme .memeAuthor .username {
-  font-size: 24px;
+  font-size: 1.1rem;
   margin: 0;
   padding: 0;
+}
+
+a {
+  color: gray
 }
 
 .meme .meme-img {
