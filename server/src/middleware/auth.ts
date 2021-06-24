@@ -25,7 +25,11 @@ const ensureAuthorized = asyncHandler(
 
         req.user = await User.findById(decoded.id);
 
-        next();
+        if (!req.user.isBanned) {
+          next();
+        } else {
+          throw new Error('User is banned');
+        }
       } catch (error) {
         console.error(error);
         res.status(401);
@@ -55,6 +59,7 @@ const ensureIsAdmin = asyncHandler(
         throw new Error('user is not admin - forbidden')
       }
     } else {
+      console.log(req.headers)
       res.status(403);
       throw new Error('Not logged in');
     }

@@ -159,11 +159,39 @@ const getMemesForUser = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * Delete the user by ID and all the corresponding
+ * memes that the user had created, this is an admin only
+ * route
+ *
+ * @route   DELETE /api/users/:id
+ * @access  restricted admin only
+ */
+
+const deleteMemeUser = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const user: any = await User.findById(req.params.id).catch((error) => {
+      res.status(404);
+      throw new Error('user not found');
+    })
+    user.isBanned = true;
+    const savedUser = user.save();
+    await Meme.deleteMany({ memeAuthor: user._id }).catch((error) => {
+      res.status(404);
+      throw new Error('Unable to find memes to delete');
+    });
+    res.json(savedUser);
+  } catch (error) {
+    throw error;
+  }
+})
+
 export {
   authorizeDiscordUser,
   getUserById,
   getLikedMemes,
   getAllUsers,
   updateUserData,
-  getMemesForUser
+  getMemesForUser,
+  deleteMemeUser
 };

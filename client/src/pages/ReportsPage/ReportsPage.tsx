@@ -44,6 +44,17 @@ const ReportsPage = () => {
     getFlags();
   };
 
+  const removeUser = async (userId: string) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userInfo.token}`
+      }
+    };
+    await axios.delete(`/api/users/${userId}`, config);
+    getFlags();
+  }
+
   const deleteMeme = async (flagId: string) => {
     const config = {
       headers: {
@@ -82,7 +93,8 @@ const ReportsPage = () => {
               <td><Link to={`/meme/${flag.meme}`}>View Meme</Link></td>
               <td>
                 <button onClick={() => { removeFlag(flag._id) }}>Remove Flag</button>
-                <button onClick={() => { deleteMeme(flag._id) }}>Delete Flag</button>
+                <button onClick={() => { deleteMeme(flag._id) }}>Delete Meme</button>
+                <button onClick={() => { removeUser(flag.user) }}>Delete User</button>
               </td>
             </tr>
           ))}
