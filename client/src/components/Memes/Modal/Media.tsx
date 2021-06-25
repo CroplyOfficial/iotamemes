@@ -13,6 +13,7 @@ import {
   TwitterIcon,
   TwitterShareButton,
 } from "react-share";
+import { Link } from 'react-router-dom';
 
 interface Props {
   user: any;
@@ -35,8 +36,8 @@ export const Media = (props: Props) => {
       </figure>
       <div className="media-content">
         <div className="content">
-          <p>
-            <strong>@{username}</strong> <small>31m</small>
+          <p style={{width: '80%'}}>
+              <Link to={`/user/${memeAuthor}`}><strong>{username}</strong></Link>
             <br />
             {(memeTags as string[])?.map((t) => `#${t}`).join(", ")}
           </p>

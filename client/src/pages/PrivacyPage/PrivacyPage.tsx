@@ -14,7 +14,7 @@ const PrivacyPage = () => {
 
 <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in IOTA MEMES. This policy is not applicable to any information collected offline or via channels other than this website. </p>
 
-<h2>Consent</h2>
+<h1>Consent</h1>
 
 <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
 

@@ -27,6 +27,11 @@ const MemeSchema = new mongoose.Schema({
     required: true,
     default: [],
   },
+  uploaded: {
+    type: Date,
+    required: true,
+    default: Date.now
+  }
 });
 
 /* -------- Meme interface -------- */
@@ -37,6 +42,7 @@ export interface MemeType extends mongoose.Document {
   imgURL: string;
   upvotes: number;
   flags: Array<string>;
+  uploaded: Date;
 }
 
 const Meme = mongoose.model<MemeType>('Meme', MemeSchema);

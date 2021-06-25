@@ -1,8 +1,18 @@
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../actions/userActions';
+
 interface Props {
   user: Record<string, any>;
 }
 export const AvatarDropdown = (props: Props) => {
   const { user } = props;
+
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  }
 
   return (
     <div className="navbar-item has-dropdown is-hoverable">
@@ -10,15 +20,34 @@ export const AvatarDropdown = (props: Props) => {
         <img src={user.avatar} alt="user-image" className="image" />
       </a>
       <div className="navbar-dropdown">
-        <a className="navbar-item" href="/settings">
-          User Settings
-        </a>
-        <a className="navbar-item" href="/terms">
-          Terms Of Service
-        </a>
-        <a className="navbar-item" href="/privacy">
-          Privacy Policy
-        </a>
+        <div className="navbar-item">
+          <a href="/newmeme">
+            New Meme
+          </a>
+        </div>
+          <div className="navbar-item">
+          <a href="/settings">
+            Settings
+          </a>
+        </div>
+        <div className="navbar-item">
+          <a href="/about">
+            About
+          </a>
+        </div>
+        <div className="navbar-item">
+          <a href="/terms">
+            Terms
+          </a>
+        </div>
+        <div className="navbar-item">
+          <a href="/privacy">
+            Privacy
+          </a>
+        </div>
+        <div className="navbar-item" onClick={logoutHandler}>
+          Logout
+        </div>
       </div>
     </div>
   );

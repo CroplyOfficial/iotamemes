@@ -1,34 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   faArrowDown,
   faArrowUp,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import { Link } from 'react-router-dom';
+import './SearchBar.css';
+import IotaButton from '../../IotaButton/IotaButton';
 
-export const SearchBar = ({ memes, setMemes }: any) => {
+export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
+  const [sortMethod, setSortMethod]: any = useState();
   const [searchTag, setSearchTag]: any = useState();
 
-  const handleClickDown = async () => {
-    console.log('asdf');
-    let memesToFilter = memes;
-    await memesToFilter.sort((a: any, b: any) => a.upvotes - b.upvotes);
-    memesToFilter =
-      memesToFilter.length > 0
-        ? memesToFilter.slice(0, memesToFilter.length - 1)
-        : memesToFilter;
-    setMemes(memesToFilter);
-  };
-  const handleClickUp = async () => {
-    console.log('asdf');
-    let memesToFilter = memes;
-    await memesToFilter.sort((a: any, b: any) => b.upvotes - a.upvotes);
-    memesToFilter =
-      memesToFilter.length > 0
-        ? memesToFilter.slice(0, memesToFilter.length - 1)
-        : memesToFilter;
-    setMemes(memesToFilter);
-  };
+  const userLogin: any = useSelector((state: RootState) => state.userLogin);
+  const isLoggedIn = userLogin && userLogin.userInfo;
+
 
   const filterByTag = async (e: any) => {
     setSearchTag(e.target.value);
@@ -38,36 +27,81 @@ export const SearchBar = ({ memes, setMemes }: any) => {
     setMemes(filtered);
   };
 
+  // sort by oldest
+  const sortByOldest = async () => {
+    let memesToFilter = memes;
+    await memesToFilter.sort((a: any, b: any) => { return new Date(a.uploaded).valueOf() - new Date(b.uploaded).valueOf(); })
+    memesToFilter = memesToFilter.length > 1 ? memesToFilter.slice(0, memesToFilter.length - 1) : memesToFilter;
+    setMemes(memesToFilter);
+  }
+
+  // sort by newest
+  const sortByNewest = async () => {
+    let memesToFilter = memes;
+    await memesToFilter.sort((a: any, b: any) => { return new Date(b.uploaded).valueOf() - new Date(a.uploaded).valueOf(); })
+    memesToFilter = memesToFilter.length > 1 ? memesToFilter.slice(0, memesToFilter.length - 1) : memesToFilter;
+    setMemes(memesToFilter);
+  }
+
+  // sort by most popular
+  const sortByUpvotes = async () => {
+    let memesToFilter = memes;
+      await memesToFilter.sort((a: any, b: any) => { return b.upvotes - a.upvotes })
+    memesToFilter = memesToFilter.length > 1 ? memesToFilter.slice(0, memesToFilter.length - 1) : memesToFilter;
+    setMemes(memesToFilter);
+  }
+
+  useEffect(() => {
+    switch (sortMethod) {
+      case 'newest':
+        sortByNewest();
+        return;
+      case 'oldest':
+        sortByOldest();
+        return;
+      case 'upvoted':
+        sortByUpvotes();
+        return;
+    }
+  }, [sortMethod])
+
   return (
-    <nav className='level is-mobile'>
-      <p className='level-item has-text-centered'>
-        <a className='link is-info'></a>
-      </p>
-      <p className='level-item has-text-centered'>
-        <div className='field'>
-          <div className='control has-icons-right'>
-            <input
-              type='text'
-              className='input is-rounded'
-              placeholder='Search for memes'
-              onKeyUp={filterByTag}
-            />
-            <span className='icon is-small is-right'>
-              <FontAwesomeIcon icon={faSearch} />
-              {/* <i className="fas fa-envolope"></i> */}
-            </span>
-          </div>
-        </div>
-      </p>
-      <p className='level-item has-text-centered'>
-        <span className='has-text-white mr-5'>order by </span>
-        <FontAwesomeIcon
-          icon={faArrowUp}
-          className='mr-1'
-          onClick={handleClickUp}
+    <nav className='search-container'>
+      {isLoggedIn ? (
+        <>
+        {showMeme ? (
+        <Link to="/newmeme">
+          <button className="uploadMeme">+ NEW MEME</button>
+        </Link>) : (
+            {children}
+        )}
+        </>
+      ) : (
+        <Link to="/about">
+            <IotaButton address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md" text='Donate to IOTA Memes' />
+        </Link>
+      )}
+      <div className='control has-icons-right'>
+        <input
+          type='text'
+          className='input is-rounded meme-search'
+          placeholder='Search for memes'
+          onKeyUp={filterByTag}
         />
-        <FontAwesomeIcon icon={faArrowDown} onClick={handleClickDown} />
-      </p>
+        <span className='icon is-small is-right'>
+          <FontAwesomeIcon icon={faSearch} />
+          {/* <i className="fas fa-envolope"></i> */}
+        </span>
+      </div>
+      <select className="meme-select" onChange={(e: any) => { setSortMethod(e.target.value) }} defaultValue="oldest">
+        <option value='newest'>Newest</option>
+        <option value='oldest'>Oldest</option>
+        <option value='upvoted'>Most Popular</option>
+      </select>
     </nav>
   );
 };
+
+SearchBar.defaultProps = {
+    showMeme: true
+}

@@ -1,21 +1,39 @@
-const IotaButton = ({ address, text }: any) => {
+import './IotaButton.css'
+
+const IotaButton = ({ address, text, style }: any) => {
   return (
-    <div style={{ margin: '10px 30px 30px 30px' }}>
+    <>
+
+      <button
+        style={style}
+        className="better-iota-button"
+        onClick={(e: any) => {
       {/* @ts-ignore */}
-      <iota-button
-        address={address}
-        currency='USD'
-        label={text}
-        type='donation'
-      >
+            const iotaButton: any = document.querySelector('iota-button').shadowRoot.querySelector('ibtn-button-donation').shadowRoot.querySelector('button');
+            iotaButton.click()
+        }}
+      >{/* @ts-ignore */}
+      {text}
+      </button>
+      <div style={{ display: 'none' }}>
         {/* @ts-ignore */}
-      </iota-button>
-    </div>
+        <iota-button
+          id="iota-button"
+          address={address}
+          currency='EUR'
+          label={text}
+          type='donation'
+        >
+          {/* @ts-ignore */}
+        </iota-button>
+      </div>
+    </>
   );
 };
 
 IotaButton.defaultProps = {
-  text: 'Donate To Artist'
+  text: 'Donate To Artist',
+  style: {}
 };
 
 export default IotaButton;

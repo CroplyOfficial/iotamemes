@@ -8,12 +8,14 @@ import './SettingsPage.css';
 import { RootState } from '../../store';
 import { logout } from '../../actions/userActions';
 import { useDispatch } from 'react-redux';
+import Modal from '../../components/Modal/Modal';
 
 const SettingsPage = ({ history }: any) => {
   const [user, setUser]: any = useState();
   const [message, setMessage]: any = useState();
   const [wallet, setWallet]: any = useState();
   const [tagline, setTagline]: any = useState();
+  const [visible, setVisible]: any = useState(false);
 
   const userLogin = useSelector((state: RootState) => state.userLogin);
   const { userInfo }: any = userLogin;
@@ -28,7 +30,6 @@ const SettingsPage = ({ history }: any) => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-
       const user = await axios.get(`/api/users/${userInfo.id}`);
       setUser(user);
       console.log(user);
@@ -66,6 +67,21 @@ const SettingsPage = ({ history }: any) => {
     }
   };
 
+  const deleteUser = async () => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${userInfo.token}`
+        }
+      };
+      const deletedUser = await axios.delete('/api/users', config);
+      logoutHandler();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     getUserData();
   }, []);
@@ -73,18 +89,24 @@ const SettingsPage = ({ history }: any) => {
   return (
     <Container80>
       <StackGrid>
+        <Modal visible={visible} setVisible={setVisible}>
+          <h1>CONFIRM ACCOUNT DELETION</h1>
+          <p style={{ padding: '10px 0' }}>You are about to delete your account for IotaMemes.com.</p>
+          <p style={{ paddingBottom: '10px' }}>All of your memes will remain live and your connected user information will be removed.</p>
+          <button className="confirm" onClick={deleteUser}>DELETE</button>
+        </Modal>
         <div className='cardContainer'>
           <Card>
             <div className='settings'>
               <div className='formBody'>
                 <form style={{ padding: 0 }} onSubmit={formSubmitHandler}>
                   {message && <div className='message'>{message}</div>}
-                  <label htmlFor='walletAddress'>Wallet Address</label>
+                  <label htmlFor='walletAddress'>IOTA Wallet Address</label>
                   <br />
                   <input
                     type='text'
                     id='walletAddress'
-                    placeholder='Wallet Address'
+                    placeholder='Iota Wallet Address'
                     defaultValue={user && user.data.wallet}
                     onChange={(e) => setWallet(e.target.value)}
                   />
@@ -101,7 +123,7 @@ const SettingsPage = ({ history }: any) => {
                   <br />
                   <input type='submit' value='UPDATE' />
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button type='button' style={{ padding: '10px 30px', background: 'red', color: 'white', border: 'none', borderRadius: '5px' }} onClick={logoutHandler}>Logout</button>
+                    <button type='button' style={{ padding: '10px 30px', background: '#f56642', color: 'white', border: 'none', borderRadius: '5px', margin: '5px', marginTop: '20px' }} onClick={(e) => {setVisible(true)}}>DELETE USER ACCOUNT</button>
                   </div>
                 </form>
               </div>

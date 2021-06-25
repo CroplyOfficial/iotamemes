@@ -159,11 +159,84 @@ const getMemesForUser = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * Delete the user by ID and all the corresponding
+ * memes that the user had created, this is an admin only
+ * route
+ *
+ * @route   DELETE /api/users/:id
+ * @access  restricted admin only
+ */
+
+const deleteMemeUser = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const user: any = await User.findById(req.params.id).catch((error) => {
+      res.status(404);
+      throw new Error('user not found');
+    })
+    user.isBanned = true;
+    const savedUser = user.save();
+    await Meme.deleteMany({ memeAuthor: user._id }).catch((error) => {
+      res.status(404);
+      throw new Error('Unable to find memes to delete');
+    });
+    res.json(savedUser);
+  } catch (error) {
+    throw error;
+  }
+})
+
+/**
+ * Delete the user and remove data, this route is meant to be
+ * called by the user themselves not an admin so the way it differs
+ * is that the memes created by the user DO NOT get nuked
+ *
+ * @route   DELETE /api/users
+ * @access  restricted
+ * */
+
+const replaceUserData = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const user: any = await User.findById(req.user._id).catch((error: any) => {
+      res.status(404);
+      throw new Error('User not found');
+    });
+    user.username = `Deleted User #${Math.floor(100000 + Math.random() * 900000)}`;
+    user.discordId = req.user._id;
+    user.wallet = '';
+    user.likedMemes = [];
+    user.bio = 'deleted user';
+    user.avatar = `/images/defaults/${Math.floor(Math.random() * 60) + 1}.png`;
+    const savedUser = await user.save();
+    res.json(savedUser);
+  } catch (error) {
+    throw error;
+  }
+})
+
+/**
+ * checks if the user is banned and returns whether the user is
+ * banned or not for now.
+ *
+ * @route   GET /api/users/@me/isBanned
+ * @access  restricted
+ * @retuns  { isBanned: true/false }
+ */
+
+const checkIsBanned = asyncHandler(async (req: Request, res: Response) => {
+  res.json({
+    isBanned: req.user.isBanned
+  });
+});
+
 export {
   authorizeDiscordUser,
   getUserById,
   getLikedMemes,
   getAllUsers,
   updateUserData,
-  getMemesForUser
+  getMemesForUser,
+  deleteMemeUser,
+  replaceUserData,
+  checkIsBanned
 };
