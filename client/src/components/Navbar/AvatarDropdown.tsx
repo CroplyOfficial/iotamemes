@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/userActions";
-import { BrowserView, MobileView } from "react-device-detect";
 
 interface Props {
   user: Record<string, any>;
