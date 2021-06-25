@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AvatarDropdown } from "./AvatarDropdown";
 import { DiscordLoginButton } from "./DiscordLoginButton";
-import IotaButton from '../../components/IotaButton/IotaButton';
+import IotaButton from "../../components/IotaButton/IotaButton";
 import "./Header.css";
+import { BrowserView, MobileView } from "react-device-detect";
 
 interface IProps {
   isLoggedIn?: any;
@@ -56,7 +57,6 @@ const Navbar = ({ isLoggedIn }: IProps) => {
               <Link to="/" className="has-text-dark" onClick={handleOnClick}>
                 Memes
               </Link>
-
             </div>
             <div className="navbar-item">
               <Link
@@ -68,31 +68,63 @@ const Navbar = ({ isLoggedIn }: IProps) => {
               </Link>
             </div>
             <div className="navbar-item">
-              <Link to="/about" className="has-text-dark" onClick={handleOnClick}>
+              <Link
+                to="/about"
+                className="has-text-dark"
+                onClick={handleOnClick}
+              >
                 About
               </Link>
-
             </div>
-            <div className="navbar-item">
-            </div>
+            <div className="navbar-item"></div>
 
             {isLoggedIn ? (
               <>
-                <IotaButton
-                  text="Donate to IOTA Memes"
-                  address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md"
-                  style={{
-                    height: '40px',
-                    fontSize: '1.1rem',
-                    background: '#ffac60',
-                    margin: '12.5px 10px',
-                    borderRadius: '20px',
-                  }}
-                />
+                <BrowserView>
+                  <IotaButton
+                    text="Donate to IOTA Memes"
+                    address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md"
+                    style={{
+                      height: "40px",
+                      fontSize: "1.1rem",
+                      background: "#ffac60",
+                      margin: "12.5px 10px",
+                      borderRadius: "20px",
+                    }}
+                  />
+                </BrowserView>
+                <MobileView>
+                  <div className="level is-mobile">
+                    <div className="level-item">
+                      <IotaButton
+                        text="Donate to IOTA Memes"
+                        address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md"
+                        style={{
+                          height: "40px",
+                          fontSize: "1.1rem",
+                          background: "#ffac60",
+                          margin: "12.5px 10px",
+                          borderRadius: "20px",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </MobileView>
                 <AvatarDropdown user={isLoggedIn} />
               </>
             ) : (
-              <DiscordLoginButton />
+              <>
+                <BrowserView>
+                  <DiscordLoginButton />
+                </BrowserView>
+                <MobileView>
+                  <div className="level is-mobile">
+                    <div className="level-item">
+                      <DiscordLoginButton />
+                    </div>
+                  </div>
+                </MobileView>
+              </>
             )}
           </div>
         </div>
