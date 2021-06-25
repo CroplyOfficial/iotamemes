@@ -2,3 +2,9 @@
     color: #363636;
 
 }
+
+@media only screen and (max-width: 900px) {
+    .modal-card-foot .better-iota-button {
+        display: block !important;
+    }
+}

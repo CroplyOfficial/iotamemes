@@ -6,7 +6,9 @@ import {
   getAllUsers,
   updateUserData,
   getMemesForUser,
-  deleteMemeUser
+  deleteMemeUser,
+  replaceUserData,
+  checkIsBanned
 } from '../controllers/userControllers';
 
 import {
@@ -16,7 +18,10 @@ import {
 
 const router = express.Router();
 
-router.route('/').get(getAllUsers).put(ensureAuthorized, updateUserData);
+router.route('/')
+  .get(getAllUsers)
+  .put(ensureAuthorized, updateUserData)
+  .delete(ensureAuthorized, replaceUserData);
 
 router.route('/authorize').post(authorizeDiscordUser);
 
@@ -27,5 +32,7 @@ router.route('/:id')
 router.route('/:id/memes').get(getMemesForUser)
 
 router.route('/@me/liked').get(ensureAuthorized, getLikedMemes);
+
+router.route('/@me/isBanned').get(ensureAuthorized, checkIsBanned);
 
 export default router;

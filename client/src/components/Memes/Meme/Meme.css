@@ -3,7 +3,6 @@
 }
 
 .meme .memeAuthor {
-  transform: translateY(-5px);
   width: 100%;
   padding: 0 10px;
   display: -webkit-box;
@@ -52,6 +51,7 @@ a {
 .meme .meta .tags {
   color: gray;
   font-size: 16px;
+  margin-bottom: 4px;
 }
 
 .meme .meta .tags span {
@@ -59,8 +59,8 @@ a {
 }
 
 .meme .like {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
 }
 
 .meme .like:hover {

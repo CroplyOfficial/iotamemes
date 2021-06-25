@@ -12,7 +12,7 @@ import {
 interface IProps {
   meme: any;
   isActive: boolean;
-  exitHandler: () => void;
+ exitHandler: () => void;
 }
 export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
   const classNames = isActive ? "is-active" : "";

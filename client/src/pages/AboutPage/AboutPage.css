@@ -9,6 +9,10 @@ p {
   padding: 5px 0 10px 0;
 }
 
+p a {
+  font-weight: bold;
+}
+
 strong {
   padding-top: 20px;
 }
@@ -21,11 +25,29 @@ ol {
 
 .aboutBottom {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   transform: translateX(-30px);
   margin-top: 30px
 }
 
 .aboutBottom img {
+  margin: 7px;
   height: 60px;
+}
+
+@media only screen and (max-width: 900px) {
+  .aboutBottom .better-iota-button {
+      display: block !important;
+  }
+
+  .aboutBottom {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .about__links {
+    display: flex;
+    justify-content: center;
+  }
 }

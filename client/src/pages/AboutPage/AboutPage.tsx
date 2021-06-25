@@ -30,7 +30,7 @@ const AboutPage = () => {
 
 
           <strong>Donations</strong>
-          <p>Donations are what keep the community going and all payments are made possible using the iota-button and Firefly Wallet using IOTA tokens. The donation system is 100% direct. All gifts, donations, and support goes directly to the creators wallet. No middleman.</p>
+          <p>Donations are what keep the community going and all payments are made possible using the <a href="https://github.com/iota-button/iota-button">iota-button</a> and <a href="https://firefly.iota.org">Firefly</a> Wallet using IOTA tokens. The donation system is 100% direct. All gifts, donations, and support goes directly to the creators wallet. No middleman.</p>
 
 
           <strong>Flagging</strong>
@@ -38,9 +38,9 @@ const AboutPage = () => {
           <p>If you deem an image inappropriate, just click the flag.</p>
           <p>It’s that simple! So, get creating, get sharing, get supporting.</p>
           <div className="aboutBottom">
-            <div className="iota-button">
+            <div className="iota-button" style={{marginLeft: '30px'}}>
               <IotaButton 
-                text='SUPPORT OUR WORK' 
+                text='DONATE TO SUPPORT OUR WORK'
                 address='iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md'
               ></IotaButton> 
             </div>
@@ -48,7 +48,7 @@ const AboutPage = () => {
               <img src='/images/firefly.png' />
             </a>
           </div>
-          <p>
+          <p className="about__links">
             <Link to="/terms" style={{marginRight: '20px'}}>Terms</Link>     <Link to="/privacy">Privacy</Link>
           </p>
         </div>

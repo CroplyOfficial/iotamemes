@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AvatarDropdown } from "./AvatarDropdown";
 import { DiscordLoginButton } from "./DiscordLoginButton";
+import IotaButton from '../../components/IotaButton/IotaButton';
 import "./Header.css";
 
 interface IProps {
@@ -55,6 +56,7 @@ const Navbar = ({ isLoggedIn }: IProps) => {
               <Link to="/" className="has-text-dark" onClick={handleOnClick}>
                 Memes
               </Link>
+
             </div>
             <div className="navbar-item">
               <Link
@@ -65,29 +67,33 @@ const Navbar = ({ isLoggedIn }: IProps) => {
                 Artists
               </Link>
             </div>
+            <div className="navbar-item">
+              <Link to="/about" className="has-text-dark" onClick={handleOnClick}>
+                About
+              </Link>
+
+            </div>
+            <div className="navbar-item">
+            </div>
+
             {isLoggedIn ? (
-              <AvatarDropdown user={isLoggedIn} />
+              <>
+                <IotaButton
+                  text="Donate to IOTA Memes"
+                  address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md"
+                  style={{
+                    height: '40px',
+                    fontSize: '1.1rem',
+                    background: '#ffac60',
+                    margin: '12.5px 10px',
+                    borderRadius: '20px',
+                  }}
+                />
+                <AvatarDropdown user={isLoggedIn} />
+              </>
             ) : (
               <DiscordLoginButton />
             )}
-            <div>
-              {/* {isLoggedIn ? (
-                <Link to="/settings" onClick={handleOnClick}>
-                  <img
-                    style={{
-                      height: "45px",
-                      width: "45px",
-                      borderRadius: "22.5px",
-                      marginTop: "7.5px",
-                      marginLeft: "15px",
-                    }}
-                    src={isLoggedIn.avatar}
-                  />
-                </Link>
-              ) : (
-                <DiscordLoginButton />
-              )} */}
-            </div>
           </div>
         </div>
       </div>

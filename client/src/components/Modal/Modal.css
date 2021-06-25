@@ -1,7 +1,7 @@
 .backdrop {
   background: rgba(0, 0, 0, 0.5);
   height: 100vh;
-  width: 100vw;
+  width: 100vw !important;
   top: 0;
   left: 0;
   position: fixed;
@@ -24,9 +24,13 @@
   display: none;
 }
 
-.modal__center .closeButtonContainer {
+.closeButtonContainer {
   display: flex;
   justify-content: flex-end;
+}
+
+.closeButtonContainer img {
+  height: 20px;
 }
 
 .modal__center .closeButtonContainer .closeButton {
@@ -36,5 +40,17 @@
 }
 
 .modal__center .closeButtonContainer .closeButton:hover {
+  cursor: pointer;
+}
+
+.confirm {
+  padding: 7.5px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #f56642;
+  color: white;
+}
+
+.confirm:hover {
   cursor: pointer;
 }
