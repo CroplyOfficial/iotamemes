@@ -8,6 +8,9 @@ import {
   getMemes,
   toggleLike,
   getMemeById,
+  getNewestMeme,
+  getPopularMeme,
+  getMostPopularInRange,
 } from '../controllers/memeControllers';
 
 const router = express.Router();
@@ -52,5 +55,10 @@ router
 router.route('/:id').get(getMemeById);
 
 router.route('/toggleLike/:id').get(ensureAuthorized, toggleLike);
+
+router.route('/@bot/newest').get(getNewestMeme);
+router.route('/@bot/popular')
+  .get(getPopularMeme)
+  .post(getMostPopularInRange);
 
 export default router;

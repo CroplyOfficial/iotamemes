@@ -12,13 +12,18 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
 import IotaButton from '../../components/IotaButton/IotaButton';
-
+import { RootState } from '../../store';
+import { Link } from 'react-router-dom';
 
 const UserPage = ({ match }: any) => {
   const [memeLoading, setMemeLoading]: any = useState(true);
   const [userLoading, setUserLoading]: any = useState(true);
   const [filteredMemes, setFilteredMemes]: any = useState([]);
+
+  const userLogin = useSelector((state: RootState) => state.userLogin);
+  const { userInfo }: any = userLogin ? userLogin : false;
 
   const [activeModal, setActiveModal]: any = useState({
     user: {},
@@ -97,8 +102,15 @@ const UserPage = ({ match }: any) => {
               />
             }
           <div className="search-container" style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
-              {!userLoading && user.wallet && <IotaButton address={user.wallet} style={{fontSize: '1rem', height: '40px', marginRight: '20px', display: 'block !important'}} />}
-            <div className='control has-icons-right'>
+            { !userLoading &&userInfo && userInfo.id === match.params.id ? (
+              <Link to="/newmeme" style={{marginRight: '15px'}}>
+                <button className="uploadMeme">+ NEW MEME</button>
+              </Link>
+            ) : (
+              <>
+                {!userLoading && user.wallet && <IotaButton address={user.wallet} style={{fontSize: '1rem', height: '40px', marginRight: '20px', display: 'block !important'}} />}
+              </>
+            )}<div className='control has-icons-right'>
               <input
                 type='text'
                 className='input is-rounded meme-search'

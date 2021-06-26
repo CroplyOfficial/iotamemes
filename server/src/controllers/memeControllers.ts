@@ -3,6 +3,13 @@ import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
 import User from '../models/User';
 
+/**
+ * Create a new meme route
+ *
+ * @route   POST /api/memes
+ * @access  restricted
+ */
+
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
     let { memeTags }: any = req.body;
@@ -25,6 +32,13 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * Get all the memes
+ *
+ * @route   GET /api/memes
+ * @access  public
+ */
+
 const getMemes = asyncHandler(async (req: Request, res: Response) => {
   try {
     const memes = await Meme.find({})
@@ -37,6 +51,15 @@ const getMemes = asyncHandler(async (req: Request, res: Response) => {
     throw error;
   }
 });
+
+/**
+ * Toggle the like that a meme has received, so if the
+ * user likes then a like would be added and if they try
+ * to like again the meme would be unliked
+ *
+ * @route   /api/memes/toggleLike/:id
+ * @access  restricted
+ */
 
 const toggleLike = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -73,6 +96,13 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * Get a meme by a single ID and return the data
+ *
+ * @route   /api/memes/:id
+ * @access  public
+ */
+
 const getMemeById = asyncHandler(async (req: Request, res: Response) => {
   const meme = await Meme.findById(req.params.id).catch((error) => {
     throw new error('unable to load this meme :(');
@@ -80,4 +110,85 @@ const getMemeById = asyncHandler(async (req: Request, res: Response) => {
   res.json(meme);
 });
 
-export { newMeme, getMemes, toggleLike, getMemeById };
+/**
+ * Get the most popular meme
+ *
+ * @route   GET /api/memes/@bot/popular
+ * @access  public
+ */
+
+const getPopularMeme = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const memes = await Meme.find({}).catch((error: any) => {
+      res.status(404);
+      throw new Error('Memes not found');
+    });
+    memes.sort((a: any, b: any) => b.upvotes - a.upvotes);
+    res.json(memes[0]);
+  } catch (error) {
+    throw error;
+  }
+});
+
+/**
+ * Get newest meme
+ *
+ * @route   GET /api/memes/@bot/newest
+ * @access  public
+ */
+
+const getNewestMeme = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const memes = await Meme.find({}).catch((error: any) => {
+      res.status(404);
+      throw new Error('Memes not found');
+    });
+    memes.sort((a: any, b: any) => new Date(b.uploaded).valueOf() - new Date(a.uploaded).valueOf());
+    res.json(memes[0]);
+  } catch (error) {
+    throw error;
+  }
+});
+
+/**
+ * get most popular memes in a date period. Use start and
+ * end date and then return the most popular meme.
+ *
+ * @route   /api/memes/@bot/popular
+ * @access  public
+ */
+
+const getMostPopularInRange = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const { start, end }: any = req.body;
+    if (start && end) {
+      const memes = await Meme.find({});
+      const filteredMemes = memes.map((meme: any) => {
+        const dateStart = new Date(start).getTime();
+        const dateEnd = new Date(end).getTime();
+        const dateUploaded = new Date(meme.uploaded).getTime();
+        if (dateUploaded < dateEnd && dateUploaded > dateStart) {
+          return meme;
+        };
+      });
+      filteredMemes.sort((a: any, b: any) => b.upvotes - a.upvotes);
+      const cleanedMemes = filteredMemes.filter((meme: any) => meme)
+      res.json(cleanedMemes);
+    } else {
+      res.status(400);
+      throw new Error('Start and end date are required');
+    }
+  } catch (error) {
+    throw error;
+  }
+});
+
+export {
+  newMeme,
+  getMemes,
+  toggleLike,
+  getMemeById,
+  getNewestMeme,
+  getPopularMeme,
+  getMostPopularInRange
+};
