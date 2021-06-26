@@ -87,44 +87,42 @@ const Meme = ({
 
   return (
     <div className="meme">
-      <Card>
-        <div className="memeAuthor" onClick={onClickHandler}>
-          <img src={user.avatar} className="avatar" />
-          <Link to={`/user/${memeAuthor}`}>
-            <h1 className="username">{user.username}</h1>
-          </Link>
+      {/* <div className="memeAuthor" onClick={onClickHandler}>
+        <img src={user.avatar} className="avatar" />
+        <Link to={`/user/${memeAuthor}`}>
+          <h1 className="username">{user.username}</h1>
+        </Link>
+          </div> */}
+      {/*<Link to={`/meme/${id}`}>*/}
+      <div onClick={onClickHandler}>
+        <div className="meme-img">
+          <img src={imgURL} />
         </div>
-        {/*<Link to={`/meme/${id}`}>*/}
-        <div onClick={onClickHandler}>
-          <div className="meme-img">
-            <img src={imgURL} />
-          </div>
+      </div>
+      {/*</Link>*/}
+      <div className="meta">
+        <div className="tags" onClick={onClickHandler}>
+          {memeTags.length > 0 &&
+            memeTags.map((tag: string) => <span key={tag}>#{tag}</span>)}
         </div>
-        {/*</Link>*/}
-        <div className="meta">
-          <div className="tags" onClick={onClickHandler}>
-            {memeTags.length > 0 &&
-              memeTags.map((tag: string) => <span key={tag}>#{tag}</span>)}
-          </div>
-          <div className="bottom">
-            <nav className="level is-mobile">
-              <div className="level-left">
-                <div className="level-item">
-                  <div className="likes">{likes} LIKOTAS</div>
-                </div>
+        <div className="bottom">
+          <nav className="level is-mobile">
+            <div className="level-left">
+              <div className="level-item">
+                <div className="likes">{likes} LIKOTAS</div>
               </div>
-              <div></div>
-              <div className="level-right">
-                <img
-                  src={isLiked ? "/images/liked.svg" : "/images/like.svg"}
-                  onClick={likeHandler}
-                  className="like"
-                />
-              </div>
-            </nav>
-          </div>
+            </div>
+            <div></div>
+            <div className="level-right">
+              <img
+                src={isLiked ? "/images/liked.svg" : "/images/like.svg"}
+                onClick={likeHandler}
+                className="like"
+              />
+            </div>
+          </nav>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

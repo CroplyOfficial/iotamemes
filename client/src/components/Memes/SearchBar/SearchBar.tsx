@@ -78,7 +78,7 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
         </>
       ) : (
         <Link to="/about">
-            <IotaButton address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md" text='Donate to IOTA Memes' />
+            <IotaButton address="iota1qplr8pw4tu24jdagkleqvp28rwsdfhx9cgcuaxvjaz5zd9gx9u50vg2v7md" text='Donate to IOTA Memes' style={{borderRadius: '25px'}} />
         </Link>
       )}
       <div className='control has-icons-right'>
@@ -93,7 +93,7 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
           {/* <i className="fas fa-envolope"></i> */}
         </span>
       </div>
-      <select className="meme-select" onChange={(e: any) => { setSortMethod(e.target.value) }} defaultValue="oldest">
+      <select className="meme-select" onChange={(e: any) => { setSortMethod(e.target.value) }} defaultValue="newest">
         <option value='newest'>Newest</option>
         <option value='oldest'>Oldest</option>
         <option value='upvoted'>Most Popular</option>

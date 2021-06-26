@@ -19,6 +19,10 @@ export const getMemes = () => async (dispatch: any) => {
 
     const { data } = await axios.get('/api/memes', config);
 
+    data.sort((a: any, b: any) => {
+      return new Date(b.uploaded).valueOf() - new Date(a.uploaded).valueOf();
+    })
+
     dispatch({
       type: GET_MEMES_SUCCESS,
       payload: data,
