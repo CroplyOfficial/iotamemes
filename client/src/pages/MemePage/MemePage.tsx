@@ -9,6 +9,14 @@ import {
   RedditShareButton,
   TwitterShareButton,
 } from 'react-share';
+import {
+  faFacebook,
+  faReddit,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useSelector } from 'react-redux';
 import Modal from '../../components/Modal/Modal';
 import IotaButton from '../../components/IotaButton/IotaButton';
@@ -103,29 +111,50 @@ const MemePage = ({ match }: any) => {
                 {artist.wallet && <IotaButton address={artist.wallet} />}
             </div>
             <div className="bottomMeme">
-              <div className='share'>
-                <div className='meme-share-icon'>
-                  <FacebookShareButton url={window.location.href}>
-                    <FacebookIcon size={32} round={true} />
-                  </FacebookShareButton>
+              <div className="level-right" style={{transform: 'translateY(7px)'}}>
+                <div className="level-item flag">
+                  <FontAwesomeIcon
+                    color="#cacaca"
+                    icon={faFlag}
+                    className="icon is-medium hover-grey"
+                    style={{ marginBottom: "0.25rem", cursor: "pointer", transform: 'translateY(-75px) translateX(130px)', height: '20px'}}
+                    onClick={flagMeme}
+                  />
                 </div>
-                <div className='meme-share-icon'>
-                  <TwitterShareButton url={window.location.href}>
-                    <TwitterIcon size={32} round={true} />
-                  </TwitterShareButton>
-                </div>
-                <div className='meme-share-icon'>
-                  <RedditShareButton url={window.location.href}>
-                    <RedditIcon size={32} round={true} />
-                  </RedditShareButton>
-                </div>
-                <img
-                  src="/images/flag.svg" 
-                  onClick={flagMeme} 
-                  style={{height: '30px', marginLeft: '30px'}}
-                />
+                <a className="level-item">
+                  <span>
+                    <FacebookShareButton
+                      url={`${window.location.href}meme/${meme.id}`}
+                    >
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="icon is-medium"
+                      />
+                    </FacebookShareButton>
+                  </span>
+                </a>
+                <a className="level-item">
+                  <span>
+                    <TwitterShareButton url={`${window.location.href}meme/${meme.id}`}>
+                      <FontAwesomeIcon
+                        icon={faTwitter}
+                        className="icon is-medium"
+                      />
+                    </TwitterShareButton>
+                  </span>
+                </a>
+                <a className="level-item">
+                  <span>
+                    <RedditShareButton url={`${window.location.href}meme/${meme.id}`}>
+                      <FontAwesomeIcon
+                        icon={faReddit}
+                        className="icon is-medium"
+                      />
+                    </RedditShareButton>
+                  </span>
+                </a>
               </div>
-          </div>
+            </div>
           </div>
         ) : (
           <div className='message'>Unable to load meme </div>
