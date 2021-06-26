@@ -14,34 +14,36 @@ const NewMeme = ({ history }: any) => {
   const { error, loading, userInfo }: any = userLogin;
 
   const [tags, setTags]: any = useState<string[]>([]);
-  const [file, setFile] = useState({ file: '' });
+  const [file, setFile] = useState({ file: { size: 0 }});
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
-
-  console.log(error, loading, userInfo);
+  const [memeError, setMemeError]: any = useState('');
 
   const formSubmitHandler = async (e: any) => {
     console.log(tags);
     e.preventDefault();
-    const formData: any = new FormData();
-    formData.append('image', file.file);
-    formData.append('memeTags', tags);
+    if (file.file.size > 2 * 1024 * 1024) {
+      setMemeError('File is too big');
+    } else {
+      const formData: any = new FormData();
+      formData.append('image', file.file);
+      formData.append('memeTags', tags);
 
-    try {
-      setUploading(true);
-      const { data } = await axios.post('/api/memes', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-        onUploadProgress: (data) => {
-          console.log(progress);
-          setProgress(Math.round((100 * data.loaded) / data.total));
-        },
-      });
-      history.push(`/meme/${data._id}`);
-    } catch (error) {
-      console.error(error);
+      try {
+        setUploading(true);
+        const { data } = await axios.post('/api/memes', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+          onUploadProgress: (data) => {
+            setProgress(Math.round((100 * data.loaded) / data.total));
+          },
+        });
+        history.push(`/meme/${data._id}`);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -51,19 +53,24 @@ const NewMeme = ({ history }: any) => {
         <StackGrid>
           <Card>
             <form onSubmit={formSubmitHandler}>
+              {memeError && <div className="error-message">{memeError}</div>}
               {/* remove this input and replace with tags */}
               <InputTags onChange={(tags) => setTags(tags)} value={tags} />
+              <p className="information-message">press <i>tab</i> or <i>enter</i> to add a tag</p>
               <input
                 type='file'
                 name='image'
                 id='image'
+                accept=".png,.jpg,.jpeg,.gif"
                 onChange={(e: any) =>
                   setFile({
                     file: e.target.files[0],
                   })
                 }
+                style={{ marginBottom: 0 }}
                 required
               />
+              <p className="information-message">max file size 2MB, jpeg, png, gif only</p>
               <input type='submit' value='upload' />
               {uploading && (
                 <>

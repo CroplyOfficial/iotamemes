@@ -1,5 +1,8 @@
 .meme {
   margin: 10px;
+  background: white;
+  padding-bottom: 12.5px;
+  border-radius: 5px;
 }
 
 .meme .memeAuthor {
@@ -39,6 +42,8 @@ a {
 
 .meme .meme-img img {
   width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;

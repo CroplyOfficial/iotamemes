@@ -113,10 +113,11 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
       upvotes: user.upvotes,
       totalMemes: user.totalMemes,
       bio: user.bio,
-    };
+    }
   });
 
-  res.json(userDataToSend);
+  const filtered: any = await userDataToSend.filter((user: any) => user.totalMemes > 0);
+  res.json(filtered);
 });
 
 /**

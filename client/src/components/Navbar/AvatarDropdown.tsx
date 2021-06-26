@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../actions/userActions';
 
 interface Props {
-  user: Record<string, any>;
+  user: any;
 }
 export const AvatarDropdown = (props: Props) => {
   const { user } = props;
@@ -25,7 +25,12 @@ export const AvatarDropdown = (props: Props) => {
             New Meme
           </a>
         </div>
-          <div className="navbar-item">
+        <div className="navbar-item">
+          <a href={`/user/${user.id}`}>
+            Profile
+          </a>
+        </div>
+        <div className="navbar-item">
           <a href="/settings">
             Settings
           </a>
