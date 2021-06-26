@@ -230,6 +230,28 @@ const checkIsBanned = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
+/**
+ * gets the user with the most amount of upvotes, basically returns
+ * data for the most popular user.
+ *
+ * @route   GET /api/users/@bot/popular
+ * @access  public
+ */
+
+const mostLikedUser = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const users = await User.find({}).catch((error: any) => {
+      res.status(404);
+      throw new Error('no artists found');
+    });
+    const cleanUsers = users.filter((user: any) => !user.isBanned)
+    cleanUsers.sort((a: any, b: any) => b.upvotes - a.upvotes);
+    res.json(cleanUsers[0]);
+  } catch (error: any) {
+    throw error;
+  }
+});
+
 export {
   authorizeDiscordUser,
   getUserById,
@@ -239,5 +261,6 @@ export {
   getMemesForUser,
   deleteMemeUser,
   replaceUserData,
-  checkIsBanned
+  checkIsBanned,
+  mostLikedUser
 };

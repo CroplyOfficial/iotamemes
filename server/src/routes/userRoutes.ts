@@ -8,7 +8,8 @@ import {
   getMemesForUser,
   deleteMemeUser,
   replaceUserData,
-  checkIsBanned
+  checkIsBanned,
+  mostLikedUser
 } from '../controllers/userControllers';
 
 import {
@@ -34,5 +35,7 @@ router.route('/:id/memes').get(getMemesForUser)
 router.route('/@me/liked').get(ensureAuthorized, getLikedMemes);
 
 router.route('/@me/isBanned').get(ensureAuthorized, checkIsBanned);
+
+router.route('/@bot/popular').get(mostLikedUser);
 
 export default router;
