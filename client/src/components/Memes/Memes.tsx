@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
-import Meme from "./Meme/Meme";
+// import Meme from "./Meme/Meme";
 import "./Memes.css";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
-import StackGrid from "react-stack-grid";
+//@ts-ignore
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { getMemes } from "../../actions/memeActions";
 import Container80 from "../Container80/Container80";
 import { RootState } from "../../store";
 import Loader from "../Loader/Loader";
 import { MemeModal } from "./Modal/Modal";
 import { MemeModal2 } from "./Modal/Modal2";
+import { useReducer } from "react";
+const Meme = lazy(() => import("./Meme/Meme"));
 
 const Memes = () => {
   const dispatch = useDispatch();
@@ -41,34 +44,39 @@ const Memes = () => {
   return (
     <div className="container is-widescreen mt-5">
       <SearchBar memes={memes} setMemes={setFilteredMemes} />
-        {loading ? (
-          <Loader />
-        ) : filteredMemes ? (
-          <>
-            {
-              <MemeModal2
-                meme={activeModal}
-                isActive={activeModal.id ? true : false}
-                exitHandler={resetActiveModal}
-              />
-            }
-            <StackGrid columnWidth={300} monitorImagesLoaded={true}>
+      {loading ? (
+        <Loader />
+      ) : filteredMemes ? (
+        <>
+          {
+            <MemeModal2
+              meme={activeModal}
+              isActive={activeModal.id ? true : false}
+              exitHandler={resetActiveModal}
+            />
+          }
+          <ResponsiveMasonry
+            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1080: 4 }}
+          >
+            <Masonry>
               {filteredMemes.map((meme: any) => (
-                <Meme
-                  key={meme._id}
-                  id={meme._id}
-                  memeAuthor={meme.memeAuthor}
-                  imgURL={meme.imgURL}
-                  upvotes={meme.upvotes}
-                  memeTags={meme.memeTags}
-                  onClick={handleOnClick}
-                />
+                <Suspense key={meme._id} fallback={<div>loading...</div>}>
+                  <Meme
+                    id={meme._id}
+                    memeAuthor={meme.memeAuthor}
+                    imgURL={meme.imgURL}
+                    upvotes={meme.upvotes}
+                    memeTags={meme.memeTags}
+                    onClick={handleOnClick}
+                  />
+                </Suspense>
               ))}
-            </StackGrid>
-          </>
-        ) : (
-          <h1>{error}</h1>
-        )}
+            </Masonry>
+          </ResponsiveMasonry>
+        </>
+      ) : (
+        <h1>{error}</h1>
+      )}
     </div>
   );
 };
