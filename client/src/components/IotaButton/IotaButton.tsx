@@ -1,6 +1,8 @@
-import './IotaButton.css'
+import './IotaButton.css';
+import { v4 as uuid4 } from 'uuid';
 
 const IotaButton = ({ address, text, style }: any) => {
+  const identifier:any = uuid4();
   return (
     <>
 
@@ -9,7 +11,7 @@ const IotaButton = ({ address, text, style }: any) => {
         className="better-iota-button"
         onClick={(e: any) => {
       {/* @ts-ignore */}
-            const iotaButton: any = document.querySelector('iota-button').shadowRoot.querySelector('ibtn-button-donation').shadowRoot.querySelector('button');
+            const iotaButton: any = document.getElementById(identifier).shadowRoot.querySelector('ibtn-button-donation').shadowRoot.querySelector('button');
             iotaButton.click()
         }}
       >{/* @ts-ignore */}
@@ -18,7 +20,7 @@ const IotaButton = ({ address, text, style }: any) => {
       <div style={{ display: 'none' }}>
         {/* @ts-ignore */}
         <iota-button
-          id="iota-button"
+          id={identifier}
           address={address}
           currency='EUR'
           label={text}

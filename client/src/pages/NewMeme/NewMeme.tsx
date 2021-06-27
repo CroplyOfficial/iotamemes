@@ -22,7 +22,7 @@ const NewMeme = ({ history }: any) => {
   const formSubmitHandler = async (e: any) => {
     console.log(tags);
     e.preventDefault();
-    if (file.file.size > 2 * 1024 * 1024) {
+    if (file.file.size > 3 * 1024 * 1024) {
       setMemeError('File is too big');
     } else {
       const formData: any = new FormData();
