@@ -44,7 +44,7 @@ const upload: any = multer({
   fileFilter: function (req, file, cb) {
     ensureIsSupported(file, cb);
   },
-  limits: { fileSize: 2 * 1024 * 1024 }
+  limits: { fileSize: 3 * 1024 * 1024, fieldSize: 3 * 1024 * 1024 }
 });
 
 router
