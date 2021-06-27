@@ -11,14 +11,14 @@ const AboutPage = () => {
         <div style={{padding: '30px'}}>
           <h1 className="aboutHeading">All you need to know about IOTA MEMES</h1>
 
-          <p>IOTA Memes is a platform for sharing and rewarding creators for the joy they bring into this world, through a simple up-voting system using Likotas. Supported by community donations and competitions.</p>
+          <p>IOTA Memes is a platform for sharing and rewarding creators for the joy they bring into this world, through a simple up-voting system using Likotas, supported by community donations and competitions.</p>
 
           <p>As simple as the title suggests, we’re all about upping the meme game!</p>
 
           <p>Login using your discord and uploads are as easy as 1, 2, 3.</p>
           <ol>
-            <li>Upload New Meme image - (1MB file limit, jpg, png, gif)</li>
-            <li>Tag your image and submit - (add up to 6 tags, separated by a comma)</li>
+            <li>Upload New Meme image - (3MB file limit, file types only jpg, png, gif)</li>
+            <li>Tag your image and submit - (add up to 6 tags, separate by a tab or enter)</li>
             <li>Get Likotas and donations! - (confirm your image, rise in the ranks, to get more rewards and donations)</li>
           </ol>
 
@@ -30,11 +30,11 @@ const AboutPage = () => {
 
 
           <strong>Donations</strong>
-          <p>Donations are what keep the community going and all payments are made possible using the <a href="https://github.com/iota-button/iota-button">iota-button</a> and <a href="https://firefly.iota.org">Firefly</a> Wallet using IOTA tokens. The donation system is 100% direct. All gifts, donations, and support goes directly to the creators wallet. No middleman.</p>
-
+          <p>Donations are what keep the community going and all payments are made possible using the <a href="https://github.com/iota-button/iota-button">iota-button</a> and <a href="https://firefly.iota.org">Firefly</a> Wallet using IOTA tokens. The donation system is 100% direct. All gifts, donations, and support go directly to the creators wallet. No middleman.</p>
+          <p>All donations are made possible using IOTA via the Firefly wallet. You can add your wallet address through the settings option in the user nav menu.</p>
 
           <strong>Flagging</strong>
-          <p>We have also included a community flagging system, so that any inappropriate content can be flagged, reveiwed, and removed.</p>
+          <p>We have also included a community flagging system, so that any inappropriate content can be flagged, reveiewed, and removed.</p>
           <p>If you deem an image inappropriate, just click the flag.</p>
           <p>It’s that simple! So, get creating, get sharing, get supporting.</p>
           <div className="aboutBottom">
