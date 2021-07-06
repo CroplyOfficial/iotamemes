@@ -7,7 +7,7 @@ IOTA Memes is a platform for sharing and rewarding memes and art through a simpl
 As simple as the title suggests, it's all about upping the meme game. Login using your discord and uploads are as easy as 1, 2, 3.
 
 
-1. Login
+1. Login with your discord
 2. Upload New Meme image
 3. Tag your image and submit
 
@@ -20,11 +20,11 @@ A community monitoring flagging system is also in place, so any inappropriate co
 
 
 ## Sharing
-Sharing is possible using the share button, to popular networks such as Discord, Twitter, Instagram, Facebook.
+Sharing is possible using the share button, to popular networks such as Discord, Twitter, Instagram, Facebook. Or copy image link with a right click.
 
 
 ## Donations
-Payment is made possible through the iota-button integration and payments can be made through Firefly Wallet in IOTA tokens. The donation system is 100% decentralized and all gifts, donations, and support goes directly to the creators wallet. No middleman.
+Payment is made possible through the iota-button integration and payments can be made through Firefly Wallet in IOTA tokens. The donation system is 100% decentralized and all gifts, donations, and support goes directly to the creators wallet. No middleman. Be sure to add your wallet address in your settings to accept donations.
 
 
 
@@ -33,6 +33,10 @@ That is literally it. So, get creating, get sharing, get supporting.
 
 
 MUCH WOW!
+
+
+Future updates will appear, if you want to help, just take a look at the current issues and suggestions :)
+
 
 
 ## DONATE TO SUPPORT OUR WORK
