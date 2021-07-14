@@ -42,21 +42,21 @@ const Memes = () => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
 
-    setMemesOnPage(
-      memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []
-    );
+    setMemesOnPage(memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
   }, [memes, filteredMemes]);
 
-  const paginate = (number: number) => { 
+  const paginate = (number: number) => {
     setCurrentPage(number);
     setFilteredMemes([]);
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
 
-    setMemesOnPage(
-      memes.slice(indexOfFirstMeme, indexOfLastMeme)
+    setMemesOnPage(memes.slice(indexOfFirstMeme, indexOfLastMeme));
+    console.log(
+      memes.slice(indexOfFirstMeme, indexOfLastMeme),
+      indexOfLastMeme,
+      indexOfFirstMeme
     );
-    console.log(memes.slice(indexOfFirstMeme, indexOfLastMeme), indexOfLastMeme, indexOfFirstMeme)
     window.scrollTo(0, 0);
   };
 
@@ -90,7 +90,12 @@ const Memes = () => {
               ))}
             </Masonry>
           </ResponsiveMasonry>
-          <Pagination totalMemes={memes.length} memesPerPage={memesPerPage} paginate={paginate} />
+          <Pagination
+            totalMemes={memes.length}
+            memesPerPage={memesPerPage}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </>
       ) : (
         <h1>{error}</h1>
