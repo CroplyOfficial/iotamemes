@@ -85,16 +85,11 @@ const MemePage = ({ match }: any) => {
   }, []);
 
   return (
-      <div className="meme__container">
+      <div className="memePage">
         {loading ? (
           <Loader />
         ) : meme && artist ? (
-          <div className='meme__card'>
-
-            <Modal visible={visible} setVisible={setVisible}>
-              {message}
-            </Modal>
-
+          <>
             <div className='artist'>
               <img src={artist.avatar} alt={artist.username} />
               <div className='username'>{artist.username}</div>
@@ -107,7 +102,7 @@ const MemePage = ({ match }: any) => {
                 ))}
               
             </div>
-            <div className='iotaButton'>
+            <div className='iotaButton' style={{marginLeft: '30px'}}>
                 {artist.wallet && <IotaButton address={artist.wallet} />}
             </div>
             <div className="bottomMeme">
@@ -155,7 +150,7 @@ const MemePage = ({ match }: any) => {
                 </a>
               </div>
             </div>
-          </div>
+          </>
         ) : (
           <div className='message'>Unable to load meme </div>
         )}

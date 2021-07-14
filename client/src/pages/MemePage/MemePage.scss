@@ -1,4 +1,10 @@
 .memePage {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 30px;
+  background: white;
+  border-radius: 5px;
+
   .artist {
     display: flex;
     justify-content: center;
@@ -30,5 +36,8 @@
     .meme-share-icon {
       margin: 0 5px;
     }
+  }
+  .bottomMeme {
+    
   }
 }
