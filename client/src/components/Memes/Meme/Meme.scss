@@ -1,5 +1,7 @@
 .meme {
   margin: 10px;
+  background: white;
+  padding-bottom: 15px;
 
   .memeAuthor {
     width: 100%;
@@ -45,8 +47,8 @@
   }
 
   .like {
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
 
     &:hover {
       cursor: pointer;

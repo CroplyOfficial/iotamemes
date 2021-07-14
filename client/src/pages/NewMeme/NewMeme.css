@@ -1,5 +1,5 @@
 .progressContainer {
-  width: 100%;
+  width: 300px;
   height: 20px;
   margin-top: 30px;
   background: white;
@@ -40,24 +40,7 @@ input[type='submit']:hover {
   cursor: pointer;
 }
 
-.error-message {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 5px 10px;
-  color: white;
-  text-align: center;
-  background: #ff5454;
-}
-
 form {
   padding: 30px;
 }
-
-.information-message {
-  font-size: 0.7rem;
-  padding: 1px;
-  color: gray;
-  margin: 5px;
-}
-
 /*# sourceMappingURL=NewMeme.css.map */

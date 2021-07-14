@@ -1,51 +1,42 @@
-.meme__container {
+.memePage .artist {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 80%;
-  margin-left: 10%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.meme__card {
-  margin-top: 50px;
-  border-radius: 5px;
-  padding: 20px;
-  background: white;
+.memePage .artist img {
+  margin: 10px;
+  border-radius: 25px;
+  height: 50px;
 }
 
-.meme__card .artist {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.meme__card .artist img {
-  height: 45px;
-  width: 45px;
-  border-radius: 22.5px;
-  margin-right: 20px;
-}
-
-.meme__card .meme-img {
-  height: 60vh;
-  width: auto;
-}
-
-.bottomMeme {
-  margin-top: 10px;
-  display: flex;
+.memePage .meme-img {
   width: 100%;
-  justify-content: flex-end;
 }
 
-.bottomMeme .share {
+.memePage .tags {
+  padding: 5px 30px;
+}
+
+.memePage .tags .tag {
+  font-size: 20px;
+  color: gray;
+}
+
+.memePage .share {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  margin-left: 20px;
 }
 
-.bottomMeme .share .meme-share-icon {
-  margin-right: 5px;
+.memePage .share .meme-share-icon {
+  margin: 0 5px;
 }
-
-.meme__card .tags {
-  margin-bottom: 5px;
-}
+/*# sourceMappingURL=MemePage.css.map */
