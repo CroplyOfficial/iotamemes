@@ -1,3 +1,11 @@
+.memePage {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 30px;
+  background: white;
+  border-radius: 5px;
+}
+
 .memePage .artist {
   display: -webkit-box;
   display: -ms-flexbox;
