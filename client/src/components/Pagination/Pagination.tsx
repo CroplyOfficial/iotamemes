@@ -10,16 +10,61 @@ const Pagination = ({
 	totalMemes,
 	memesPerPage,
 	paginate,
+	currentPage,
 }: {
 	totalMemes: number;
 	memesPerPage: number;
 	paginate: (number: number) => any;
+	currentPage: number;
 }) => {
 	const [pageNums, setPageNums] = useState<PageNumbers>({
 		middle: [],
-		lastPage: 1,
+		lastPage: 0,
 	});
-	console.log(totalMemes, memesPerPage);
+	const getNormal = (lastPage: number) => {
+		const half = lastPage / 2;
+		const below = half - 1 > 1 ? half - 1 : -1;
+		const above = half + 1 > 1 ? half + 1 : -1;
+		return [below, half, above];
+	};
+
+	const addLess = () => {
+		const [least, ..._] = pageNums.middle;
+		const leastMinus3 = least - 3 > 1 ? least - 3 : 1;
+		if (_.includes(3)) return;
+		const middle = Array.from(
+			new Set([leastMinus3, leastMinus3 + 1, leastMinus3 + 2, ..._]),
+		);
+
+		setPageNums({
+			...pageNums,
+			middle: middle.slice(0, 7),
+		});
+	};
+	const addMore = () => {
+		const max = pageNums.middle[pageNums.middle.length - 1];
+		const maxAbove3 = max + 3 > 1 ? max + 3 : 1;
+		if (pageNums.middle.includes(pageNums.lastPage - 1)) return;
+		const middle = Array.from(
+			new Set([...pageNums.middle, maxAbove3 - 2, maxAbove3 - 1, maxAbove3]),
+		);
+
+		setPageNums({
+			...pageNums,
+			middle: middle.slice(Math.max(middle.length - 7, 0)),
+		});
+	};
+
+	const nextPage = () => {
+		const next = currentPage + 1;
+		if (next > pageNums.lastPage) return;
+		paginate(currentPage + 1);
+	};
+	const prevPage = () => {
+		const next = currentPage - 1;
+		if (next < 1) return;
+		paginate(currentPage - 1);
+	};
 
 	useEffect(() => {
 		let pageNumbers: number[] = [];
@@ -27,16 +72,11 @@ const Pagination = ({
 			pageNumbers.push(i);
 		}
 
-		const half = pageNumbers.length / 2;
-		const below = half - 1 > 1 ? half - 1 : -1;
-		const above = half + 1 > 1 ? half + 1 : -1;
-		const newPageNumbers = [below, half, above];
-
-		setPageNums({ middle: [below, half, above], lastPage: pageNumbers.length });
-	}, []);
-
+		const middle = getNormal(pageNums.lastPage);
+		setPageNums({ middle: middle, lastPage: pageNumbers.length });
+	}, [pageNums.lastPage]);
 	useEffect(() => {
-		console.log("pageNums", pageNums);
+		console.log(pageNums);
 	}, [pageNums]);
 
 	return (
@@ -46,8 +86,12 @@ const Pagination = ({
 			aria-label="pagination"
 			style={{ marginTop: "50px" }}
 		>
-			<a className="pagination-previous my__pagination">Previous</a>
-			<a className="pagination-next my__pagination">Next page</a>
+			<a className="pagination-previous my__pagination" onClick={prevPage}>
+				Previous
+			</a>
+			<a className="pagination-next my__pagination" onClick={nextPage}>
+				Next page
+			</a>
 			<ul className="pagination-list ">
 				<li>
 					<a
@@ -60,7 +104,7 @@ const Pagination = ({
 						1
 					</a>
 				</li>
-				<li>
+				<li onClick={addLess}>
 					<span className="pagination-ellipsis">&hellip;</span>
 				</li>
 				{pageNums.middle?.map((page) => (
@@ -77,7 +121,7 @@ const Pagination = ({
 						</a>
 					</li>
 				))}
-				<li>
+				<li onClick={addMore}>
 					<span className="pagination-ellipsis">&hellip;</span>
 				</li>
 				<li>
