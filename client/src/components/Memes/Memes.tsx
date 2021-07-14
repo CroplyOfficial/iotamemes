@@ -25,6 +25,7 @@ const Memes = () => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [memesPerPage, setMemesPerPage] = useState<number>(20);
+  const [memesOnPage, setMemesOnPage] = useState<any>();
 
   const handleOnClick = (meme: Record<string, any>) => {
     setActiveModal(meme);
@@ -41,10 +42,10 @@ const Memes = () => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
 
-    setFilteredMemes(
+    setMemesOnPage(
       memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []
     );
-  }, [memes]);
+  }, [memes, filteredMemes]);
 
   const paginate = (number: number) => { 
     setCurrentPage(number);
@@ -52,7 +53,7 @@ const Memes = () => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
 
-    setFilteredMemes(
+    setMemesOnPage(
       memes.slice(indexOfFirstMeme, indexOfLastMeme)
     );
     console.log(memes.slice(indexOfFirstMeme, indexOfLastMeme), indexOfLastMeme, indexOfFirstMeme)
@@ -64,7 +65,7 @@ const Memes = () => {
       <SearchBar memes={memes} setMemes={setFilteredMemes} />
       {loading ? (
         <Loader />
-      ) : filteredMemes ? (
+      ) : memesOnPage ? (
         <>
           {
             <MemeModal2
@@ -77,7 +78,7 @@ const Memes = () => {
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1080: 4 }}
           >
             <Masonry>
-              {filteredMemes.map((meme: any) => (
+              {memesOnPage.map((meme: any) => (
                 <Meme
                   id={meme._id}
                   memeAuthor={meme.memeAuthor}

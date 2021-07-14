@@ -31,6 +31,10 @@ const Meme = ({
 
   const [likes, setLikes] = useState(upvotes);
 
+  useEffect(() => {
+    setLikes(upvotes)
+  }, [upvotes])
+
   let userInfo: any;
 
   const userLogin: any = useSelector((state: RootState) => state.userLogin);
