@@ -49,6 +49,21 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
       await memesToFilter.sort((a: any, b: any) => { return b.upvotes - a.upvotes })
     memesToFilter = memesToFilter.length > 1 ? memesToFilter.slice(0, memesToFilter.length - 1) : memesToFilter;
     setMemes(memesToFilter);
+  };
+
+  const timeNow = new Date().getTime();
+
+  const sortByTrending = async () => {
+    let memesToFilter = memes;
+    await memesToFilter.sort((a: any, b: any) => {
+      let uploadedADelta = (timeNow - new Date(a.uploaded).getTime())/86400000;
+      uploadedADelta = uploadedADelta > 1 ? uploadedADelta : 1;
+      let uploadedBDelta = (timeNow - new Date(b.uploaded).getTime())/86400;
+      uploadedBDelta = uploadedBDelta > 1 ? uploadedBDelta : 1;
+      console.log(uploadedBDelta, b.uploaded, timeNow, new Date(b.uploaded).getTime())
+      return b.upvotes/uploadedBDelta - a.upvotes/uploadedADelta
+    });
+    setMemes(memesToFilter)
   }
 
   useEffect(() => {
@@ -61,6 +76,9 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
         return;
       case 'upvoted':
         sortByUpvotes();
+        return;
+      case 'trending':
+        sortByTrending();
         return;
     }
   }, [sortMethod])
@@ -95,6 +113,7 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
       </div>
       <select className="meme-select" onChange={(e: any) => { setSortMethod(e.target.value) }} defaultValue="newest">
         <option value='newest'>Newest</option>
+        <option value='trending'>Trending</option>
         <option value='oldest'>Oldest</option>
         <option value='upvoted'>Most Popular</option>
       </select>
