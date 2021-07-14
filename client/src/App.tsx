@@ -34,11 +34,10 @@ function App() {
       }
     }
     try {
-
-    const { data } = await axios.get('/api/users/@me/isBanned', config);
-    const { isBanned } = data;
-    console.log(isBanned)
-    setBanned(isBanned);
+      const { data } = await axios.get('/api/users/@me/isBanned', config);
+      const { isBanned } = data;
+      console.log(isBanned)
+      setBanned(isBanned);
     } catch (error) {
       dispatch(logout());
     }

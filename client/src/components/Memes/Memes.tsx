@@ -1,5 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 // import Meme from "./Meme/Meme";
 import "./Memes.css";
 import { SearchBar } from "./SearchBar/SearchBar";
@@ -7,13 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 //@ts-ignore
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { getMemes } from "../../actions/memeActions";
-import Container80 from "../Container80/Container80";
 import { RootState } from "../../store";
 import Loader from "../Loader/Loader";
-import { MemeModal } from "./Modal/Modal";
 import { MemeModal2 } from "./Modal/Modal2";
-import { useReducer } from "react";
-const Meme = lazy(() => import("./Meme/Meme"));
+import Meme from "./Meme/Meme";
+import Pagination from "../Pagination/Pagination";
 
 const Memes = () => {
   const dispatch = useDispatch();
@@ -25,6 +22,9 @@ const Memes = () => {
   const [activeModal, setActiveModal] = useState<Record<string, any>>({
     user: {},
   });
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [memesPerPage, setMemesPerPage] = useState<number>(20);
 
   const handleOnClick = (meme: Record<string, any>) => {
     setActiveModal(meme);
@@ -38,8 +38,26 @@ const Memes = () => {
   }, []);
 
   useEffect(() => {
-    setFilteredMemes(memes);
+    const indexOfLastMeme = currentPage * memesPerPage;
+    const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
+
+    setFilteredMemes(
+      memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []
+    );
   }, [memes]);
+
+  const paginate = (number: number) => { 
+    setCurrentPage(number);
+    setFilteredMemes([]);
+    const indexOfLastMeme = currentPage * memesPerPage;
+    const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
+
+    setFilteredMemes(
+      memes.slice(indexOfFirstMeme, indexOfLastMeme)
+    );
+    console.log(memes.slice(indexOfFirstMeme, indexOfLastMeme), indexOfLastMeme, indexOfFirstMeme)
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="container is-widescreen mt-5">
@@ -60,19 +78,18 @@ const Memes = () => {
           >
             <Masonry>
               {filteredMemes.map((meme: any) => (
-                <Suspense key={meme._id} fallback={<div>loading...</div>}>
-                  <Meme
-                    id={meme._id}
-                    memeAuthor={meme.memeAuthor}
-                    imgURL={meme.imgURL}
-                    upvotes={meme.upvotes}
-                    memeTags={meme.memeTags}
-                    onClick={handleOnClick}
-                  />
-                </Suspense>
+                <Meme
+                  id={meme._id}
+                  memeAuthor={meme.memeAuthor}
+                  imgURL={meme.imgURL}
+                  upvotes={meme.upvotes}
+                  memeTags={meme.memeTags}
+                  onClick={handleOnClick}
+                />
               ))}
             </Masonry>
           </ResponsiveMasonry>
+          <Pagination totalMemes={memes.length} memesPerPage={memesPerPage} paginate={paginate} />
         </>
       ) : (
         <h1>{error}</h1>
