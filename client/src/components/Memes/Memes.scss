@@ -5,19 +5,3 @@
 }
 
 
-.pagination {
-  width: 70%;
-  margin-left: 15%;
-  display: flex;
-  padding: 45px 0 10px 0;
-  overflow-x: scroll;
-
-  .pageNum {
-    padding: 0px 20px;
-
-    &:hover {
-      cursor: pointer;
-      color: white;
-    }
-  }
-}

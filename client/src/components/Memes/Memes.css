@@ -7,22 +7,5 @@
           justify-content: space-between;
 }
 
-.pagination {
-  width: 70%;
-  margin-left: 15%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 45px 0 10px 0;
-  overflow-x: scroll;
-}
 
-.pagination .pageNum {
-  padding: 0px 20px;
-}
-
-.pagination .pageNum:hover {
-  cursor: pointer;
-  color: white;
-}
 /*# sourceMappingURL=Memes.css.map */

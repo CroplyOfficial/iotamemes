@@ -158,7 +158,7 @@ const MemePage = ({ match }: any) => {
 							className="level-right"
 							style={{ transform: "translateY(7px)" }}
 						>
-							<div className="level-item flag">
+							<div className="level-item">
 								<FontAwesomeIcon
 									color="#cacaca"
 									icon={faFlag}
@@ -172,11 +172,11 @@ const MemePage = ({ match }: any) => {
 									onClick={flagMeme}
 								/>
 							</div>
-							<a className="leve-item">
+							<a className="level-item">
 								{isLiked ? (
 									<FontAwesomeIcon
 										icon={faHeart}
-										style={{ fontSize: "30px", marginRight: "10px" }}
+										style={{ fontSize: "30px" }}
 										onClick={likeHandler}
 									/>
 								) : (
@@ -184,7 +184,6 @@ const MemePage = ({ match }: any) => {
 										icon={faHeart}
 										style={{
 											fontSize: "30px",
-											marginRight: "10px",
 											color: "rgba(0,0,0,0)",
 											stroke: "black",
 											strokeWidth: "30px",
