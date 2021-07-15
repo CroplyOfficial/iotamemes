@@ -41,8 +41,7 @@ const Memes = () => {
   useEffect(() => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
-
-    setMemesOnPage(memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
+    setMemesOnPage(filteredMemes ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme) : memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
   }, [memes, filteredMemes]);
 
   const paginate = (number: number) => {
