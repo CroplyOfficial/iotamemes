@@ -64,7 +64,6 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
       uploadedADelta = uploadedADelta > 1 ? uploadedADelta : 1;
       let uploadedBDelta = (timeNow - new Date(b.uploaded).getTime())/86400;
       uploadedBDelta = uploadedBDelta > 1 ? uploadedBDelta : 1;
-      console.log(uploadedBDelta, b.uploaded, timeNow, new Date(b.uploaded).getTime())
       return b.upvotes/uploadedBDelta - a.upvotes/uploadedADelta
     });
     setMemes(memesToFilter)

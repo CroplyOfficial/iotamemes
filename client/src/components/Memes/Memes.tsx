@@ -42,20 +42,18 @@ const Memes = () => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
     setMemesOnPage(filteredMemes ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme) : memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
-  }, [memes, filteredMemes]);
+  }, [filteredMemes]);
+
+  useEffect(() => {
+    setFilteredMemes(memes)
+  }, [memes]);
 
   const paginate = (number: number) => {
     setCurrentPage(number);
-    setFilteredMemes([]);
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
 
-    setMemesOnPage(memes.slice(indexOfFirstMeme, indexOfLastMeme));
-    console.log(
-      memes.slice(indexOfFirstMeme, indexOfLastMeme),
-      indexOfLastMeme,
-      indexOfFirstMeme
-    );
+    setMemesOnPage(filteredMemes ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme) : memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
     window.scrollTo(0, 0);
   };
 
