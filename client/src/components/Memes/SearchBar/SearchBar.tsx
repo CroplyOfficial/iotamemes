@@ -21,10 +21,14 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
 
   const filterByTag = async (e: any) => {
     setSearchTag(e.target.value);
-    const filtered = await memes.filter((meme: any) =>
-      JSON.stringify(meme.memeTags).includes(e.target.value)
-    );
-    setMemes(filtered);
+    if (e.target.value && e.target.value !== '') {
+      const filtered = await memes.filter((meme: any) => {
+        return meme.memeTags.join(' ').toLowerCase().includes(e.target.value)
+      });
+      setMemes(filtered);
+    } else {
+      setMemes(memes)
+    }
   };
 
   // sort by oldest
@@ -60,7 +64,6 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
       uploadedADelta = uploadedADelta > 1 ? uploadedADelta : 1;
       let uploadedBDelta = (timeNow - new Date(b.uploaded).getTime())/86400;
       uploadedBDelta = uploadedBDelta > 1 ? uploadedBDelta : 1;
-      console.log(uploadedBDelta, b.uploaded, timeNow, new Date(b.uploaded).getTime())
       return b.upvotes/uploadedBDelta - a.upvotes/uploadedADelta
     });
     setMemes(memesToFilter)
