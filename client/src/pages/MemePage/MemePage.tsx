@@ -153,12 +153,12 @@ const MemePage = ({ match }: any) => {
 					<div className="iotaButton" style={{ marginLeft: "30px" }}>
 						{artist.wallet && <IotaButton address={artist.wallet} />}
 					</div>
-					<div className="bottomMeme">
+					<div className="my__bottomMeme is-mobile" style={{ padding: "15px" }}>
 						<div
 							className="level-right"
 							style={{ transform: "translateY(7px)" }}
 						>
-							<div className="level-item">
+							<div className="level-item" style={{ paddingRight: "35px" }}>
 								<FontAwesomeIcon
 									color="#cacaca"
 									icon={faFlag}
@@ -166,7 +166,7 @@ const MemePage = ({ match }: any) => {
 									style={{
 										marginBottom: "0.25rem",
 										cursor: "pointer",
-										transform: "translateY(-75px) translateX(130px)",
+										transform: "translateY(-75px) translateX(210px)",
 										height: "20px",
 									}}
 									onClick={flagMeme}
@@ -176,7 +176,7 @@ const MemePage = ({ match }: any) => {
 								{isLiked ? (
 									<FontAwesomeIcon
 										icon={faHeart}
-										style={{ fontSize: "30px" }}
+										style={{ fontSize: "30px", color: "cacaca" }}
 										onClick={likeHandler}
 									/>
 								) : (
@@ -199,7 +199,10 @@ const MemePage = ({ match }: any) => {
 									>
 										<FontAwesomeIcon
 											icon={faFacebook}
-											className="icon is-medium"
+											className="icon is-medium hover-grey "
+											style={{
+												color: "cacaca",
+											}}
 										/>
 									</FacebookShareButton>
 								</span>
@@ -211,7 +214,10 @@ const MemePage = ({ match }: any) => {
 									>
 										<FontAwesomeIcon
 											icon={faTwitter}
-											className="icon is-medium"
+											className="icon is-medium icon is-medium hover-grey"
+											style={{
+												color: "cacaca",
+											}}
 										/>
 									</TwitterShareButton>
 								</span>
@@ -224,6 +230,9 @@ const MemePage = ({ match }: any) => {
 										<FontAwesomeIcon
 											icon={faReddit}
 											className="icon is-medium"
+											style={{
+												color: "cacaca",
+											}}
 										/>
 									</RedditShareButton>
 								</span>
