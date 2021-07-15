@@ -21,10 +21,14 @@ export const SearchBar = ({ memes, setMemes, showMeme, children }: any) => {
 
   const filterByTag = async (e: any) => {
     setSearchTag(e.target.value);
-    const filtered = await memes.filter((meme: any) =>
-      JSON.stringify(meme.memeTags).includes(e.target.value)
-    );
-    setMemes(filtered);
+    if (e.target.value && e.target.value !== '') {
+      const filtered = await memes.filter((meme: any) => {
+        return meme.memeTags.join(' ').toLowerCase().includes(e.target.value)
+      });
+      setMemes(filtered);
+    } else {
+      setMemes(memes)
+    }
   };
 
   // sort by oldest
