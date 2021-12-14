@@ -41,11 +41,17 @@ const Memes = () => {
   useEffect(() => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
-    setMemesOnPage(filteredMemes ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme) : memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
+    setMemesOnPage(
+      filteredMemes
+        ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme)
+        : memes
+        ? memes.slice(indexOfFirstMeme, indexOfLastMeme)
+        : []
+    );
   }, [filteredMemes]);
 
   useEffect(() => {
-    setFilteredMemes(memes)
+    setFilteredMemes(memes);
   }, [memes]);
 
   const paginate = (number: number) => {
@@ -53,7 +59,13 @@ const Memes = () => {
     const indexOfLastMeme = currentPage * memesPerPage;
     const indexOfFirstMeme = indexOfLastMeme - memesPerPage;
 
-    setMemesOnPage(filteredMemes ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme) : memes ? memes.slice(indexOfFirstMeme, indexOfLastMeme) : []);
+    setMemesOnPage(
+      filteredMemes
+        ? filteredMemes.slice(indexOfFirstMeme, indexOfLastMeme)
+        : memes
+        ? memes.slice(indexOfFirstMeme, indexOfLastMeme)
+        : []
+    );
     window.scrollTo(0, 0);
   };
 
@@ -87,12 +99,14 @@ const Memes = () => {
               ))}
             </Masonry>
           </ResponsiveMasonry>
-          <Pagination
-            totalMemes={memes.length}
-            memesPerPage={memesPerPage}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
+          {memes && (
+            <Pagination
+              totalMemes={memes.length}
+              memesPerPage={memesPerPage}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          )}
         </>
       ) : (
         <h1>{error}</h1>
