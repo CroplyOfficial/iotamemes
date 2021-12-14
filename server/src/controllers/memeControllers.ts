@@ -1,7 +1,7 @@
-import Meme, { MemeType } from '../models/Meme';
-import asyncHandler from 'express-async-handler';
-import { Request, Response } from 'express';
-import User from '../models/User';
+import Meme, { MemeType } from "../models/Meme";
+import asyncHandler from "express-async-handler";
+import { Request, Response } from "express";
+import User from "../models/User";
 
 /**
  * Create a new meme route
@@ -13,8 +13,11 @@ import User from '../models/User';
 const newMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
     let { memeTags }: any = req.body;
-    memeTags = memeTags.split(',');
+    memeTags = memeTags.split(",");
 
+    if (!req.file) {
+      throw new Error("No file found");
+    }
     const meme: MemeType = await Meme.create({
       memeAuthor: req.user._id,
       memeTags,
@@ -42,9 +45,9 @@ const newMeme = asyncHandler(async (req: Request, res: Response) => {
 const getMemes = asyncHandler(async (req: Request, res: Response) => {
   try {
     const memes = await Meme.find({})
-      .populate('users')
-      .exec((error, foundMemes) => {
-        if (error) throw new Error('memes not found');
+      .populate("users")
+      .exec((error: any, foundMemes: MemeType[]) => {
+        if (error) throw new Error("memes not found");
         res.json(foundMemes);
       });
   } catch (error) {
@@ -63,11 +66,11 @@ const getMemes = asyncHandler(async (req: Request, res: Response) => {
 
 const toggleLike = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const meme: any = await Meme.findById(req.params.id).catch((error) => {
-      throw new Error('Meme not found :(');
+    const meme: any = await Meme.findById(req.params.id).catch(() => {
+      throw new Error("Meme not found :(");
     });
-    const user: any = await User.findById(meme.memeAuthor).catch((error) => {
-      throw new Error('Meme-ist doesnt exist ( o _ o )');
+    const user: any = await User.findById(meme.memeAuthor).catch(() => {
+      throw new Error("Meme-ist doesnt exist ( o _ o )");
     });
     const self: any = await User.findById(req.user.id);
 
@@ -104,8 +107,8 @@ const toggleLike = asyncHandler(async (req: Request, res: Response) => {
  */
 
 const getMemeById = asyncHandler(async (req: Request, res: Response) => {
-  const meme = await Meme.findById(req.params.id).catch((error) => {
-    throw new error('unable to load this meme :(');
+  const meme = await Meme.findById(req.params.id).catch(() => {
+    throw new Error("unable to load this meme :(");
   });
   res.json(meme);
 });
@@ -121,7 +124,7 @@ const getPopularMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
     const memes = await Meme.find({}).catch((error: any) => {
       res.status(404);
-      throw new Error('Memes not found');
+      throw new Error("Memes not found");
     });
     memes.sort((a: any, b: any) => b.upvotes - a.upvotes);
     res.json(memes[0]);
@@ -141,9 +144,12 @@ const getNewestMeme = asyncHandler(async (req: Request, res: Response) => {
   try {
     const memes = await Meme.find({}).catch((error: any) => {
       res.status(404);
-      throw new Error('Memes not found');
+      throw new Error("Memes not found");
     });
-    memes.sort((a: any, b: any) => new Date(b.uploaded).valueOf() - new Date(a.uploaded).valueOf());
+    memes.sort(
+      (a: any, b: any) =>
+        new Date(b.uploaded).valueOf() - new Date(a.uploaded).valueOf()
+    );
     res.json(memes[0]);
   } catch (error) {
     throw error;
@@ -158,37 +164,76 @@ const getNewestMeme = asyncHandler(async (req: Request, res: Response) => {
  * @access  public
  */
 
-const getMostPopularInRange = asyncHandler(async (req: Request, res: Response) => {
-  try {
-    const { start, end }: any = req.body;
-    if (start && end) {
-      const memes = await Meme.find({});
-      const filteredMemes = memes.map((meme: any) => {
-        const dateStart = new Date(start).getTime();
-        const dateEnd = new Date(end).getTime();
-        const dateUploaded = new Date(meme.uploaded).getTime();
-        if (dateUploaded < dateEnd && dateUploaded > dateStart) {
-          return meme;
-        };
-      });
-      filteredMemes.sort((a: any, b: any) => b.upvotes - a.upvotes);
-      const cleanedMemes = filteredMemes.filter((meme: any) => meme)
-      res.json(cleanedMemes);
-    } else {
-      res.status(400);
-      throw new Error('Start and end date are required');
+const getMostPopularInRange = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      const { start, end }: any = req.body;
+      if (start && end) {
+        const memes = await Meme.find({});
+        const filteredMemes = memes.map((meme: any) => {
+          const dateStart = new Date(start).getTime();
+          const dateEnd = new Date(end).getTime();
+          const dateUploaded = new Date(meme.uploaded).getTime();
+          if (dateUploaded < dateEnd && dateUploaded > dateStart) {
+            return meme;
+          }
+        });
+        filteredMemes.sort((a: any, b: any) => b.upvotes - a.upvotes);
+        const cleanedMemes = filteredMemes.filter((meme: any) => meme);
+        res.json(cleanedMemes);
+      } else {
+        res.status(400);
+        throw new Error("Start and end date are required");
+      }
+    } catch (error) {
+      throw error;
     }
-  } catch (error) {
-    throw error;
+  }
+);
+
+/**
+ * Get the meme and then update it
+ *
+ * make sure the author of the meme actually is the owner
+ *
+ * @route PATCH /api/memes/:id
+ */
+
+const editMeme = asyncHandler(async (req: Request, res: Response) => {
+  const meme = await Meme.findById(req.params.id);
+  if (meme && String(meme.memeAuthor) === String(req.user._id)) {
+    const { memeTags } = req.body;
+    meme.memeTags = memeTags ?? meme.memeTags;
+    const savedMeme = await meme.save();
+    res.json(savedMeme);
+  } else {
+    throw new Error("you do not own this meme :weirdsmileguy:");
+  }
+});
+
+/**
+ * Delete the meme
+ *
+ * @route DEL /api/memes/:id
+ */
+
+const deleteMeme = asyncHandler(async (req: Request, res: Response) => {
+  const meme = await Meme.findById(req.params.id);
+  if (meme && String(meme.memeAuthor) === String(req.user._id)) {
+    const deleted = await Meme.findByIdAndDelete(req.params.id);
+    res.json(deleted);
+  } else {
   }
 });
 
 export {
   newMeme,
   getMemes,
+  editMeme,
+  deleteMeme,
   toggleLike,
   getMemeById,
   getNewestMeme,
   getPopularMeme,
-  getMostPopularInRange
+  getMostPopularInRange,
 };

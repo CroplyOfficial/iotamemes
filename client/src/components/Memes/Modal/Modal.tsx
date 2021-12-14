@@ -12,7 +12,7 @@ import {
 interface IProps {
   meme: any;
   isActive: boolean;
- exitHandler: () => void;
+  exitHandler: () => void;
 }
 export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
   const classNames = isActive ? "is-active" : "";
@@ -52,7 +52,6 @@ export const MemeModal = ({ meme, isActive, exitHandler }: IProps) => {
           {/* <!-- Content ... --> */}
         </section>
         <footer className="modal-card-foot">
-          {(memeTags as string[])?.map((t) => `#${t}`).join(", ")}
           <div className="level is-mobile">
             <div className="level-item mr-1">
               <div className="meme-share-icon">

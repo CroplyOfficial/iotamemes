@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   GET_MEMES_FAIL,
   GET_MEMES_SUCCESS,
   GET_MEMES_REQUEST,
-} from '../constants/memeContants';
+} from "../constants/memeContants";
 
 export const getMemes = () => async (dispatch: any) => {
   try {
@@ -13,21 +13,21 @@ export const getMemes = () => async (dispatch: any) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
-    const { data } = await axios.get('/api/memes', config);
+    const { data } = await axios.get("/api/memes", config);
 
     data.sort((a: any, b: any) => {
       return new Date(b.uploaded).valueOf() - new Date(a.uploaded).valueOf();
-    })
+    });
 
     dispatch({
       type: GET_MEMES_SUCCESS,
       payload: data,
     });
-  } catch (error) {
+  } catch (error: any) {
     dispatch({
       type: GET_MEMES_FAIL,
       payload:

@@ -1,8 +1,8 @@
-import express, { Request, Response } from 'express';
-import path from 'path';
-import multer from 'multer';
+import express, { Request, Response } from "express";
+import path from "path";
+import multer from "multer";
 
-import { ensureAuthorized } from '../middleware/auth';
+import { ensureAuthorized } from "../middleware/auth";
 import {
   newMeme,
   getMemes,
@@ -11,18 +11,20 @@ import {
   getNewestMeme,
   getPopularMeme,
   getMostPopularInRange,
-} from '../controllers/memeControllers';
+  editMeme,
+  deleteMeme,
+} from "../controllers/memeControllers";
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, path.join(__dirname, '../uploads/'));
+    cb(null, path.join(__dirname, "../uploads/"));
   },
   filename(req, file, cb) {
     cb(
       null,
-      `${Date.now()}${file.originalname.split('.')[0]}${path.extname(
+      `${Date.now()}${file.originalname.split(".")[0]}${path.extname(
         file.originalname
       )}`
     );
@@ -35,7 +37,7 @@ function ensureIsSupported(file: any, cb: any) {
   if (extname) {
     return cb(null, true);
   } else {
-    cb('not supported');
+    cb("not supported");
   }
 }
 
@@ -44,21 +46,23 @@ const upload: any = multer({
   fileFilter: function (req, file, cb) {
     ensureIsSupported(file, cb);
   },
-  limits: { fileSize: 3 * 1024 * 1024, fieldSize: 3 * 1024 * 1024 }
+  limits: { fileSize: 3 * 1024 * 1024, fieldSize: 3 * 1024 * 1024 },
 });
 
 router
-  .route('/')
-  .post(upload.single('image'), ensureAuthorized, newMeme)
+  .route("/")
+  .post(upload.single("image"), ensureAuthorized, newMeme)
   .get(getMemes);
 
-router.route('/:id').get(getMemeById);
+router
+  .route("/:id")
+  .get(getMemeById)
+  .patch(ensureAuthorized, editMeme)
+  .delete(ensureAuthorized, deleteMeme);
 
-router.route('/toggleLike/:id').get(ensureAuthorized, toggleLike);
+router.route("/toggleLike/:id").get(ensureAuthorized, toggleLike);
 
-router.route('/@bot/newest').get(getNewestMeme);
-router.route('/@bot/popular')
-  .get(getPopularMeme)
-  .post(getMostPopularInRange);
+router.route("/@bot/newest").get(getNewestMeme);
+router.route("/@bot/popular").get(getPopularMeme).post(getMostPopularInRange);
 
 export default router;

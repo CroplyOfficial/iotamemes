@@ -1,11 +1,11 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 /* ---------- Meme Schema ---------- */
 
 const MemeSchema = new mongoose.Schema({
   memeAuthor: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "users",
     required: true,
   },
   memeTags: {
@@ -30,21 +30,21 @@ const MemeSchema = new mongoose.Schema({
   uploaded: {
     type: Date,
     required: true,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 /* -------- Meme interface -------- */
 
 export interface MemeType extends mongoose.Document {
   memeAuthor: Schema.Types.ObjectId;
-  memeTag: Array<string>;
+  memeTags: Array<string>;
   imgURL: string;
   upvotes: number;
   flags: Array<string>;
   uploaded: Date;
 }
 
-const Meme = mongoose.model<MemeType>('Meme', MemeSchema);
+const Meme = mongoose.model<MemeType>("Meme", MemeSchema);
 
 export default Meme;
