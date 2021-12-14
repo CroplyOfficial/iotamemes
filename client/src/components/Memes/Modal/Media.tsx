@@ -90,14 +90,14 @@ export const Media = (props: Props) => {
               (memeTags as string[])?.map((t) => `#${t}`).join(", ")
             )}
             {userInfo && memeAuthor === userInfo.id && (
-              <>
+              <div className="action-buttons">
                 <button className="save" onClick={saveMeme}>
                   Save
                 </button>
                 <button onClick={deleteMeme} className="delete-meme">
                   Delete
                 </button>
-              </>
+              </div>
             )}
           </p>
         </div>

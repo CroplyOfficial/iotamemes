@@ -7,7 +7,13 @@
           justify-content: space-between;
 }
 
-.save {
+.action-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.action-buttons .save {
   background: green;
   margin: 10px 0px;
   margin-left: 0;
@@ -18,11 +24,11 @@
   font-weight: 600;
 }
 
-.save:hover {
+.action-buttons .save:hover {
   cursor: pointer;
 }
 
-.delete-meme {
+.action-buttons .delete-meme {
   background: red;
   margin: 10px 10px;
   padding: 10px 15px;
@@ -32,7 +38,7 @@
   font-weight: 600;
 }
 
-.delete-meme:hover {
+.action-buttons .delete-meme:hover {
   cursor: pointer;
 }
 /*# sourceMappingURL=Memes.css.map */

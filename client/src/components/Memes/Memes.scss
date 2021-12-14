@@ -3,31 +3,35 @@
   justify-content: space-between;
 }
 
-.save {
-  background: green;
-  margin: 10px 0px;
-  margin-left: 0;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: 600;
+.action-buttons {
+  display: flex;
 
-  &:hover {
-    cursor: pointer;
+  .save {
+    background: green;
+    margin: 10px 0px;
+    margin-left: 0;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
-}
 
-.delete-meme {
-  background: red;
-  margin: 10px 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: 600;
+  .delete-meme {
+    background: red;
+    margin: 10px 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
